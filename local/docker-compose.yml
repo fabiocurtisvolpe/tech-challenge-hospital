@@ -1,0 +1,23 @@
+services:
+  postgres:
+    build: .
+    image: postgres:17
+    container_name: my_agendamento_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secret}
+      POSTGRES_DB: ${POSTGRES_DB:-agendamento}
+    ports:
+      - "5432:5432"
+    volumes:
+      - agendamento_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-admin} -d ${POSTGRES_DB:-agendamento}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  agendamento_pg_data:

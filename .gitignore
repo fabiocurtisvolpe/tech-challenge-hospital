@@ -1,0 +1,23 @@
+# Compilação e Build (Maven)
+target/
+**/target/
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Log Files
+*.log
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários do Spring Boot
+.help
