@@ -35,6 +35,10 @@ public class ConsultaEntity extends BaseEntity {
     @JoinColumn(name = "enfermeiro_id", nullable = false)
     private UsuarioEntity enfermeiro;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "especialidade_id", nullable = false)
+    private EspecialidadeEntity especialidade;
+
     @PrePersist
     protected void onCreate() {
         if (this.getDataCriacao() == null) {
