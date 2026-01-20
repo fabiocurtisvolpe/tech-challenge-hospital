@@ -9,12 +9,12 @@ import com.adjt.agendamento.core.util.MensagemUtil;
 import com.adjt.agendamento.data.entity.ConsultaEntity;
 import com.adjt.agendamento.data.mapper.ConsultaMapper;
 import com.adjt.agendamento.data.repository.jpa.ConsultaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Repository
 public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
@@ -40,20 +40,33 @@ public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
 
     @Override
     @Transactional
-    public Consulta atualizar(Consulta entidade) {
-        return null;
+    public Consulta atualizar(Consulta model) {
+
+        ConsultaEntity entity = consultaMapper.toEntity(model);
+        Objects.requireNonNull(entity, MensagemUtil.NAO_FOI_POSSIVEL_EXECUTAR_OPERACAO);
+
+        ConsultaEntity savedEntity = consultaRepository.save(entity);
+        return consultaMapper.toModel(savedEntity);
     }
 
     @Override
     @Transactional
-    public Boolean excluir(Consulta entidade) {
-        return null;
+    public Boolean excluir(Integer id) {
+
+        ConsultaEntity entity = consultaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.CONSULTA_NAO_ENCONTRADA));
+
+        consultaRepository.delete(entity);
+        return true;
     }
 
-    @Override
     @Transactional
-    public Optional<Consulta> obterPorId(Integer id) {
-        return Optional.empty();
+    public Consulta obterPorId(Integer id) {
+
+        ConsultaEntity entity = consultaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.CONSULTA_NAO_ENCONTRADA));
+
+        return consultaMapper.toModel(entity);
     }
 
     @Override

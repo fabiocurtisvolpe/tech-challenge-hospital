@@ -11,9 +11,7 @@ public interface ConsultaPort<Consulta> {
 
     Consulta criar(Consulta model);
     Consulta atualizar(Consulta model);
-    Boolean excluir(Consulta model);
-
-    Optional<Consulta> obterPorId(Integer id);
+    Boolean excluir(Integer id);
 
     ResultadoPaginacaoDTO<Consulta> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts);
 }
