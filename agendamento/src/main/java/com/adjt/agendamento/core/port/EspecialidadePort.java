@@ -3,12 +3,12 @@ package com.adjt.agendamento.core.port;
 import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
 import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
-import com.adjt.agendamento.core.model.Especialidade;
+
 
 import java.util.List;
 import java.util.Optional;
 
-public interface EspecialidadeRepositoryPort {
+public interface EspecialidadePort<Especialidade> {
 
     Especialidade criar(Especialidade entidade);
     Especialidade atualizar(Especialidade entidade);

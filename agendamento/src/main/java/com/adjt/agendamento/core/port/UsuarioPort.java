@@ -3,12 +3,11 @@ package com.adjt.agendamento.core.port;
 import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
 import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
-import com.adjt.agendamento.core.model.Usuario;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UsuarioRepositoryPort {
+public interface UsuarioPort<Usuario> {
 
     Usuario criar(Usuario entidade);
     Usuario atualizar(Usuario entidade);
