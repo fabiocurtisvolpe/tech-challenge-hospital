@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
-public interface EspacialidadeRepository extends JpaRepository<EspecialidadeEntity, Integer>,
+public interface EspecialidadeRepository extends JpaRepository<EspecialidadeEntity, Integer>,
         JpaSpecificationExecutor<EspecialidadeEntity> {
 
     Optional<EspecialidadeEntity> obterPorId(Integer id);

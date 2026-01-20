@@ -5,6 +5,7 @@ import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
 import com.adjt.agendamento.core.model.Perfil;
 import com.adjt.agendamento.core.port.PerfilPort;
+import com.adjt.agendamento.data.repository.jpa.PerfilRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +13,13 @@ import java.util.Optional;
 
 @Repository
 public class PerfilRepositoryAdapter implements PerfilPort<Perfil> {
+
+    private final PerfilRepository perfilRepository;
+
+    public PerfilRepositoryAdapter(PerfilRepository perfilRepository) {
+        this.perfilRepository = perfilRepository;
+    }
+
     @Override
     public Perfil criar(Perfil entidade) {
         return null;

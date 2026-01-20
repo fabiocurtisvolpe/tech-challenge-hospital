@@ -5,6 +5,7 @@ import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
 import com.adjt.agendamento.core.model.Especialidade;
 import com.adjt.agendamento.core.port.EspecialidadePort;
+import com.adjt.agendamento.data.repository.jpa.EspecialidadeRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +13,13 @@ import java.util.Optional;
 
 @Repository
 public class EspacialidadeRepositoryAdapter implements EspecialidadePort<Especialidade> {
+
+    private final EspecialidadeRepository especialidadeRepository;
+
+    public EspacialidadeRepositoryAdapter(EspecialidadeRepository especialidadeRepository) {
+        this.especialidadeRepository = especialidadeRepository;
+    }
+
     @Override
     public Especialidade criar(Especialidade entidade) {
         return null;

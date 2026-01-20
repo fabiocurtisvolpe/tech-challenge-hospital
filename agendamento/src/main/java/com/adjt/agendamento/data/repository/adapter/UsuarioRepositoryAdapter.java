@@ -5,6 +5,7 @@ import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
 import com.adjt.agendamento.core.model.Usuario;
 import com.adjt.agendamento.core.port.UsuarioPort;
+import com.adjt.agendamento.data.repository.jpa.UsuarioRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +13,12 @@ import java.util.Optional;
 
 @Repository
 public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
+
+    private final UsuarioRepository usuarioRepository;
+
+    public UsuarioRepositoryAdapter(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @Override
     public Usuario criar(Usuario entidade) {

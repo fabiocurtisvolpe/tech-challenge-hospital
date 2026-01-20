@@ -5,6 +5,7 @@ import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
 import com.adjt.agendamento.core.model.Consulta;
 import com.adjt.agendamento.core.port.ConsultaPort;
+import com.adjt.agendamento.data.repository.jpa.ConsultaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +13,13 @@ import java.util.Optional;
 
 @Repository
 public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
+
+    private final ConsultaRepository consultaRepository;
+
+    public ConsultaRepositoryAdapter(ConsultaRepository consultaRepository) {
+        this.consultaRepository = consultaRepository;
+    }
+
     @Override
     public Consulta criar(Consulta entidade) {
         return null;
