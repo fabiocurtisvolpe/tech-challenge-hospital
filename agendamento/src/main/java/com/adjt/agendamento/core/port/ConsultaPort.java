@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface ConsultaPort<Consulta> {
 
-    Consulta criar(Consulta entidade);
-    Consulta atualizar(Consulta entidade);
-    Boolean excluir(Consulta entidade);
+    Consulta criar(Consulta model);
+    Consulta atualizar(Consulta model);
+    Boolean excluir(Consulta model);
 
     Optional<Consulta> obterPorId(Integer id);
 
