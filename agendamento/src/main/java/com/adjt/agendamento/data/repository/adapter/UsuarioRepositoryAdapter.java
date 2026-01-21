@@ -12,6 +12,7 @@ import com.adjt.agendamento.data.mapper.UsuarioMapper;
 import com.adjt.agendamento.data.repository.jpa.UsuarioRepository;
 import com.adjt.agendamento.data.service.PaginadoService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
     }
 
     @Override
+    @Transactional
     public Usuario criar(Usuario model) {
         UsuarioEntity entity = usuarioMapper.toEntity(model);
         Objects.requireNonNull(entity, MensagemUtil.NAO_FOI_POSSIVEL_EXECUTAR_OPERACAO);
@@ -39,6 +41,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
     }
 
     @Override
+    @Transactional
     public Usuario atualizar(Usuario model) {
         UsuarioEntity entity = usuarioMapper.toEntity(model);
         Objects.requireNonNull(entity, MensagemUtil.NAO_FOI_POSSIVEL_EXECUTAR_OPERACAO);
@@ -48,6 +51,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
     }
 
     @Override
+    @Transactional
     public Boolean excluir(Integer id) {
 
         UsuarioEntity entity = usuarioRepository.findById(id)
@@ -59,6 +63,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
     }
 
     @Override
+    @Transactional
     public Usuario obterPorId(Integer id) {
         UsuarioEntity entity = usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.USUARIO_NAO_ENCONTRADO));
@@ -66,6 +71,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
     }
 
     @Override
+    @Transactional
     public Usuario obterPorEmail(String email) {
         UsuarioEntity entity = usuarioRepository.findByEmailAndAtivoTrue(email)
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.USUARIO_NAO_ENCONTRADO));
@@ -74,6 +80,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
     }
 
     @Override
+    @Transactional
     public ResultadoPaginacaoDTO<Usuario> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts) {
         PaginadoService<UsuarioEntity, Usuario> paginadoService = new PaginadoService<>(
                 usuarioRepository,

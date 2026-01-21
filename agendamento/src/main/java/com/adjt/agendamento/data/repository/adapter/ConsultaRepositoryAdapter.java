@@ -62,6 +62,7 @@ public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
         return true;
     }
 
+    @Override
     @Transactional
     public Consulta obterPorId(Integer id) {
         ConsultaEntity entity = consultaRepository.findById(id)

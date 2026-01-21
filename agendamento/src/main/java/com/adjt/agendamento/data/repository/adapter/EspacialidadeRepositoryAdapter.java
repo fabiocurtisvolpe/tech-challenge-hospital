@@ -61,6 +61,7 @@ public class EspacialidadeRepositoryAdapter implements EspecialidadePort<Especia
         return true;
     }
 
+    @Override
     @Transactional
     public Especialidade obterPorId(Integer id) {
         EspecialidadeEntity entity = especialidadeRepository.findById(id)

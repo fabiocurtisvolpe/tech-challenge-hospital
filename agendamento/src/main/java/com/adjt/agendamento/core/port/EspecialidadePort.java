@@ -11,6 +11,6 @@ public interface EspecialidadePort<Especialidade> {
     Especialidade criar(Especialidade model);
     Especialidade atualizar(Especialidade model);
     Boolean excluir(Integer id);
-
+    Especialidade obterPorId(Integer id);
     ResultadoPaginacaoDTO<Especialidade> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts);
 }

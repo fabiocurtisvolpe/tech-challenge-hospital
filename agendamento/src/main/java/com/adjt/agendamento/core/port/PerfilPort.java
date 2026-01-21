@@ -12,6 +12,7 @@ public interface PerfilPort<Perfil> {
     Perfil criar(Perfil model);
     Perfil atualizar(Perfil model);
     Boolean excluir(Integer id);
+    Perfil obterPorId(Integer id);
 
     ResultadoPaginacaoDTO<Perfil> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts);
 }

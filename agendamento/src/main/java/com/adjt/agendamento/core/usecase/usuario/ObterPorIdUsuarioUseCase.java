@@ -20,8 +20,8 @@ public class ObterPorIdUsuarioUseCase {
     public Usuario run(Integer id, String usuarioLogado) {
 
         final Usuario usrLogado = UsuarioLogadoUtil.usuarioLogado(usuarioPort, usuarioLogado);
+        UsuarioValidator.validarPermissaoBuscar(usrLogado);
 
-
-        return null;
+        return usuarioPort.obterPorId(id);
     }
 }

@@ -51,6 +51,7 @@ public class PerfilRepositoryAdapter implements PerfilPort<Perfil> {
     }
 
     @Override
+    @Transactional
     public Boolean excluir(Integer id) {
         PerfilEntity entity = perfilRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.PERFIL_NAO_ENCONTRADO));
@@ -59,6 +60,7 @@ public class PerfilRepositoryAdapter implements PerfilPort<Perfil> {
         return true;
     }
 
+    @Override
     @Transactional
     public Perfil obterPorId(Integer id) {
         PerfilEntity entity = perfilRepository.findById(id)
@@ -68,6 +70,7 @@ public class PerfilRepositoryAdapter implements PerfilPort<Perfil> {
     }
 
     @Override
+    @Transactional
     public ResultadoPaginacaoDTO<Perfil> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts) {
         PaginadoService<PerfilEntity, Perfil> paginadoService = new PaginadoService<>(
                 perfilRepository,

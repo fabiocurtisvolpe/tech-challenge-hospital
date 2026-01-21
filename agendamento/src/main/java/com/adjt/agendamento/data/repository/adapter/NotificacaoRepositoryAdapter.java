@@ -46,6 +46,7 @@ public class NotificacaoRepositoryAdapter implements NotificacaoPort<Notificacao
     }
 
     @Override
+    @Transactional
     public Boolean excluir(Integer id) {
         NotificacaoEntity entity = notificacaoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.NOTIFICACAO_NAO_ENCONTRADA));
@@ -54,6 +55,7 @@ public class NotificacaoRepositoryAdapter implements NotificacaoPort<Notificacao
         return true;
     }
 
+    @Override
     @Transactional
     public Notificacao obterPorId(Integer id) {
         NotificacaoEntity entity = notificacaoRepository.findById(id)
