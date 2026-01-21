@@ -64,6 +64,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
         return usuarioMapper.toModel(entity);
     }
 
+    @Override
     public Usuario obterPorEmail(String email) {
         UsuarioEntity entity = usuarioRepository.findByEmailAndAtivoTrue(email)
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.USUARIO_NAO_ENCONTRADO));

@@ -14,4 +14,20 @@ public class Usuario extends Base {
     private String senha;
     private Boolean ativo;
     private Set<Perfil> perfis;
+
+    public boolean isMedico() {
+        return perfis.stream().anyMatch(perfil -> "ROLE_MEDICO".equals(perfil.getNome()));
+    }
+
+    public boolean isEnfermeiro() {
+        return perfis.stream().anyMatch(perfil -> "ROLE_ENFERMEIRO".equals(perfil.getNome()));
+    }
+
+    public boolean isPaciente() {
+        return perfis.stream().anyMatch(perfil -> "ROLE_PACIENTE".equals(perfil.getNome()));
+    }
+
+    public boolean isAdmin() {
+        return perfis.stream().anyMatch(perfil -> "ROLE_ADMIN".equals(perfil.getNome()));
+    }
 }
