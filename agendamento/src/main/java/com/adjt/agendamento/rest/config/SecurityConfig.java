@@ -20,13 +20,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // Desabilitado para facilitar testes em APIs (REST)
                 .authorizeHttpRequests(auth -> auth
                         // 1) Login Público
-                        .requestMatchers("/login/**", "/public/**").permitAll()
+                        .requestMatchers("/api/login/**", "/api/public/**").permitAll()
 
                         // 2) Utilizador: Admin, Médico e Paciente podem acessar
-                        .requestMatchers("/usuario/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MEDICO", "ROLE_PACIENTE")
+                        .requestMatchers("/api/usuario/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MEDICO", "ROLE_PACIENTE")
 
                         // 3) Consulta: Médico e Paciente podem acessar
-                        .requestMatchers("/consulta/**").hasAnyAuthority("ROLE_MEDICO", "ROLE_PACIENTE")
+                        .requestMatchers("/api/consulta/**").hasAnyAuthority("ROLE_MEDICO", "ROLE_PACIENTE")
 
                         // Qualquer outra requisição precisa estar autenticada
                         .anyRequest().authenticated()
