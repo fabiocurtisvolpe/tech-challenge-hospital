@@ -1,11 +1,11 @@
 package com.adjt.agendamento.core.port;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface NotificacaoPort<Notificacao> {
 
-    Optional<Notificacao> obterPorId(Integer id);
-    Boolean excluir(Notificacao entidade);
+    Notificacao criar(Notificacao model);
+    Notificacao atualizar(Notificacao model);
+    Boolean excluir(Integer id);
     List<Notificacao> obterTodas();
 }

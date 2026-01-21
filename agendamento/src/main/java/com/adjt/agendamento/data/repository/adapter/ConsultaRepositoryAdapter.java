@@ -8,7 +8,9 @@ import com.adjt.agendamento.core.port.ConsultaPort;
 import com.adjt.agendamento.core.util.MensagemUtil;
 import com.adjt.agendamento.data.entity.ConsultaEntity;
 import com.adjt.agendamento.data.mapper.ConsultaMapper;
+import com.adjt.agendamento.data.mapper.EntityMapper;
 import com.adjt.agendamento.data.repository.jpa.ConsultaRepository;
+import com.adjt.agendamento.data.service.PaginadoService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -62,7 +64,6 @@ public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
 
     @Transactional
     public Consulta obterPorId(Integer id) {
-
         ConsultaEntity entity = consultaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.CONSULTA_NAO_ENCONTRADA));
 
@@ -72,6 +73,21 @@ public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
     @Override
     @Transactional
     public ResultadoPaginacaoDTO<Consulta> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts) {
-        return null;
+
+        PaginadoService<ConsultaEntity, Consulta> paginadoService = new PaginadoService<>(
+                consultaRepository,
+                new EntityMapper<>() {
+                    @Override
+                    public Consulta toModel(ConsultaEntity e) {
+                        return consultaMapper.toModel(e);
+                    }
+
+                    @Override
+                    public ConsultaEntity toEntity(Consulta m) {
+                        return consultaMapper.toEntity(m);
+                    }
+                });
+
+        return paginadoService.listarPaginado(page, size, filters, sorts);
     }
 }

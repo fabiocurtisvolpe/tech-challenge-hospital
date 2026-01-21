@@ -5,53 +5,88 @@ import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
 import com.adjt.agendamento.core.model.Usuario;
 import com.adjt.agendamento.core.port.UsuarioPort;
+import com.adjt.agendamento.core.util.MensagemUtil;
+import com.adjt.agendamento.data.entity.UsuarioEntity;
+import com.adjt.agendamento.data.mapper.EntityMapper;
+import com.adjt.agendamento.data.mapper.UsuarioMapper;
 import com.adjt.agendamento.data.repository.jpa.UsuarioRepository;
+import com.adjt.agendamento.data.service.PaginadoService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Repository
 public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
 
     private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper usuarioMapper;
 
-    public UsuarioRepositoryAdapter(UsuarioRepository usuarioRepository) {
+    public UsuarioRepositoryAdapter(UsuarioRepository usuarioRepository,
+                                    UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioMapper = usuarioMapper;
     }
 
     @Override
-    public Usuario criar(Usuario entidade) {
-        return null;
+    public Usuario criar(Usuario model) {
+        UsuarioEntity entity = usuarioMapper.toEntity(model);
+        Objects.requireNonNull(entity, MensagemUtil.NAO_FOI_POSSIVEL_EXECUTAR_OPERACAO);
+
+        UsuarioEntity savedEntity = usuarioRepository.save(entity);
+        return usuarioMapper.toModel(savedEntity);
     }
 
     @Override
-    public Usuario atualizar(Usuario entidade) {
-        return null;
+    public Usuario atualizar(Usuario model) {
+        UsuarioEntity entity = usuarioMapper.toEntity(model);
+        Objects.requireNonNull(entity, MensagemUtil.NAO_FOI_POSSIVEL_EXECUTAR_OPERACAO);
+
+        UsuarioEntity savedEntity = usuarioRepository.save(entity);
+        return usuarioMapper.toModel(savedEntity);
     }
 
     @Override
-    public Boolean excluir(Usuario entidade) {
-        return null;
+    public Boolean excluir(Integer id) {
+
+        UsuarioEntity entity = usuarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.USUARIO_NAO_ENCONTRADO));
+
+        entity.setAtivo(Boolean.FALSE);
+        usuarioRepository.save(entity);
+        return true;
     }
 
-    @Override
-    public Optional<Usuario> obterPorId(Integer id) {
-        return Optional.empty();
+    public Usuario obterPorId(Integer id) {
+        UsuarioEntity entity = usuarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.USUARIO_NAO_ENCONTRADO));
+        return usuarioMapper.toModel(entity);
     }
 
-    @Override
-    public Optional<Usuario> obterPorNome(String nome) {
-        return Optional.empty();
-    }
+    public Usuario obterPorEmail(String email) {
+        UsuarioEntity entity = usuarioRepository.findByEmailAndAtivoTrue(email)
+                .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.USUARIO_NAO_ENCONTRADO));
 
-    @Override
-    public Optional<Usuario> obterPorEmail(String email) {
-        return Optional.empty();
+        return usuarioMapper.toModel(entity);
     }
 
     @Override
     public ResultadoPaginacaoDTO<Usuario> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts) {
-        return null;
+        PaginadoService<UsuarioEntity, Usuario> paginadoService = new PaginadoService<>(
+                usuarioRepository,
+                new EntityMapper<>() {
+                    @Override
+                    public Usuario toModel(UsuarioEntity e) {
+                        return usuarioMapper.toModel(e);
+                    }
+
+                    @Override
+                    public UsuarioEntity toEntity(Usuario m) {
+                        return usuarioMapper.toEntity(m);
+                    }
+                });
+
+        return paginadoService.listarPaginado(page, size, filters, sorts);
     }
 }

@@ -9,7 +9,5 @@ import java.util.Optional;
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>,
         JpaSpecificationExecutor<UsuarioEntity> {
 
-    Optional<UsuarioEntity> obterPorId(Integer id);
-    Optional<UsuarioEntity> obterPorNome(String nome);
-    Optional<UsuarioEntity> obterPorEmail(String email);
+    Optional<UsuarioEntity> findByEmailAndAtivoTrue(String email);
 }

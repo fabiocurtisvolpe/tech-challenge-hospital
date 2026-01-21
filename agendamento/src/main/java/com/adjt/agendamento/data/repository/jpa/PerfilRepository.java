@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
-public interface PerfilRepository extends JpaRepository<PerfilRepository, Integer>,
+public interface PerfilRepository extends JpaRepository<PerfilEntity, Integer>,
         JpaSpecificationExecutor<PerfilEntity> {
-
-    Optional<PerfilEntity> obterPorId(Integer id);
 }
