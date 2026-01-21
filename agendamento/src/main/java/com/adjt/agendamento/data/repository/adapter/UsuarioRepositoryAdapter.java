@@ -58,6 +58,7 @@ public class UsuarioRepositoryAdapter implements UsuarioPort<Usuario> {
         return true;
     }
 
+    @Override
     public Usuario obterPorId(Integer id) {
         UsuarioEntity entity = usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.USUARIO_NAO_ENCONTRADO));

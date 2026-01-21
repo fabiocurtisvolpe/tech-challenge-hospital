@@ -3,6 +3,7 @@ package com.adjt.agendamento.core.model;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -29,5 +30,14 @@ public class Usuario extends Base {
 
     public boolean isAdmin() {
         return perfis.stream().anyMatch(perfil -> "ROLE_ADMIN".equals(perfil.getNome()));
+    }
+
+    public boolean hasRole(String role) {
+        return perfis != null && perfis.stream()
+                .anyMatch(p -> role.equalsIgnoreCase(p.getNome()));
+    }
+
+    public boolean hasAnyRole(List<String> roles) {
+        return roles.stream().anyMatch(this::hasRole);
     }
 }

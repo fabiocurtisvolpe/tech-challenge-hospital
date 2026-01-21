@@ -5,16 +5,16 @@ import com.adjt.agendamento.core.port.UsuarioPort;
 import com.adjt.agendamento.core.util.UsuarioLogadoUtil;
 import com.adjt.agendamento.core.validator.UsuarioValidator;
 
-public class CadastrarUsuarioUseCase {
+public class AtualizarUsuarioUseCase {
 
     private final UsuarioPort<Usuario> usuarioPort;
 
-    private CadastrarUsuarioUseCase(UsuarioPort<Usuario> usuarioPort) {
+    private AtualizarUsuarioUseCase(UsuarioPort<Usuario> usuarioPort) {
         this.usuarioPort = usuarioPort;
     }
 
-    public static CadastrarUsuarioUseCase create(UsuarioPort<Usuario> usuarioPort) {
-        return new CadastrarUsuarioUseCase(usuarioPort);
+    public static AtualizarUsuarioUseCase create(UsuarioPort<Usuario> usuarioPort) {
+        return new AtualizarUsuarioUseCase(usuarioPort);
     }
 
     public Usuario run(Usuario usuario, String usuarioLogado) {
@@ -23,6 +23,6 @@ public class CadastrarUsuarioUseCase {
         UsuarioValidator.validarPermissao(usuario, usrLogado);
         UsuarioValidator.validarCamposObrigatorios(usuario);
 
-        return usuarioPort.criar(usuario);
+        return usuarioPort.atualizar(usuario);
     }
 }

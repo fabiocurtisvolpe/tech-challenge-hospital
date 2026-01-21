@@ -12,6 +12,7 @@ public interface UsuarioPort<Usuario> {
     Usuario atualizar(Usuario model);
     Boolean excluir(Integer id);
     Usuario obterPorEmail(String email);
+    Usuario obterPorId(Integer id);
 
     ResultadoPaginacaoDTO<Usuario> listarPaginado(int page, int size, List<FilterDTO> filters, List<SortDTO> sorts);
 }
