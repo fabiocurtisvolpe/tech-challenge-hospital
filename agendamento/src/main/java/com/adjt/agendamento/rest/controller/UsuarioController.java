@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/usuario")
 public class UsuarioController {
 
+    @GetMapping
+    public String getMessage() { return "Rota usuario"; }
+
+    /*
     private final ObterPorIdUsuarioUseCase obterPorIdUsuarioUseCase;
     private final ObterPorEmailUsuarioUseCase obterPorEmailUsuarioUseCase;
 
@@ -24,4 +28,6 @@ public class UsuarioController {
         //Usuario usuario = this.obterPorEmailUsuarioUseCase.run(UsuarioLogadoUtil.);
         return null;
     }
+
+     */
 }
