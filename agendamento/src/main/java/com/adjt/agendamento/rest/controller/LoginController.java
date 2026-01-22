@@ -1,8 +1,9 @@
 package com.adjt.agendamento.rest.controller;
 
+import com.adjt.agendamento.rest.dto.request.LoginRequest;
 import com.adjt.agendamento.rest.security.service.AuthenticationService;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(Authentication authentication) {
-        return authenticationService.authenticate(authentication);
+    public String login(@RequestBody LoginRequest loginRequest) {
+        return authenticationService.authenticate(loginRequest.email(), loginRequest.senha());
     }
 }
