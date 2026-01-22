@@ -32,7 +32,7 @@ public class UsuarioValidator {
             throw new IllegalArgumentException(MensagemUtil.USUARIO_PERFIL_VAZIO);
         }
 
-        if (!usuario.hasAnyRole(PERFIS_PERMITIDOS)) {
+        if (usuario.hasAnyRole(PERFIS_PERMITIDOS)) {
             throw new IllegalArgumentException(MensagemUtil.USUARIO_PERFIL_INVALIDO);
         }
     }
@@ -74,7 +74,7 @@ public class UsuarioValidator {
 
     public static void validarPermissaoBuscar(Usuario usuario) {
 
-        if (!usuario.hasAnyRole(PERFIS_PERMITIDOS)) {
+        if (usuario.hasAnyRole(PERFIS_PERMITIDOS)) {
             throw new IllegalArgumentException(MensagemUtil.USUARIO_PERFIL_INVALIDO);
         }
 

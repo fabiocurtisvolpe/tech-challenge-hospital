@@ -16,6 +16,8 @@ public class Usuario extends Base {
     private Boolean ativo;
     private Set<Perfil> perfis;
 
+
+
     public boolean isMedico() {
         return perfis.stream().anyMatch(perfil -> "ROLE_MEDICO".equals(perfil.getNome()));
     }
@@ -38,6 +40,6 @@ public class Usuario extends Base {
     }
 
     public boolean hasAnyRole(List<String> roles) {
-        return roles.stream().anyMatch(this::hasRole);
+        return roles.stream().noneMatch(this::hasRole);
     }
 }

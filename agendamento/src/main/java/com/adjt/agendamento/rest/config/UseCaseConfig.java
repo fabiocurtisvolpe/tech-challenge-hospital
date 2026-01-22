@@ -1,7 +1,10 @@
 package com.adjt.agendamento.rest.config;
 
+import com.adjt.agendamento.core.model.Perfil;
 import com.adjt.agendamento.core.model.Usuario;
+import com.adjt.agendamento.core.port.PerfilPort;
 import com.adjt.agendamento.core.port.UsuarioPort;
+import com.adjt.agendamento.core.usecase.usuario.CadastrarUsuarioUseCase;
 import com.adjt.agendamento.core.usecase.usuario.ObterPorEmailUsuarioUseCase;
 import com.adjt.agendamento.core.usecase.usuario.ObterPorIdUsuarioUseCase;
 import org.springframework.context.annotation.Bean;
@@ -18,5 +21,11 @@ public class UseCaseConfig {
     @Bean
     public ObterPorIdUsuarioUseCase obterUsuarioPorIdUseCase(UsuarioPort<Usuario> usuarioPort) {
         return ObterPorIdUsuarioUseCase.create(usuarioPort);
+    }
+
+    @Bean
+    public CadastrarUsuarioUseCase cadastrarUsuarioUseCase(UsuarioPort<Usuario> usuarioPort,
+                                                           PerfilPort<Perfil> perfilPort) {
+        return CadastrarUsuarioUseCase.create(usuarioPort, perfilPort);
     }
 }

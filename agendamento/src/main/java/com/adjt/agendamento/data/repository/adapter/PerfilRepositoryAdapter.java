@@ -17,6 +17,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class PerfilRepositoryAdapter implements PerfilPort<Perfil> {
@@ -67,6 +69,14 @@ public class PerfilRepositoryAdapter implements PerfilPort<Perfil> {
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.PERFIL_NAO_ENCONTRADO));
 
         return perfilMapper.toModel(entity);
+    }
+
+    @Override
+    @Transactional
+    public Set<Perfil> buscarPorIds(Set<Integer> ids) {
+        return perfilRepository.findAllById(ids).stream()
+                .map(perfilMapper::toModel)
+                .collect(Collectors.toSet());
     }
 
     @Override
