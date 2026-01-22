@@ -1,7 +1,8 @@
-package com.adjt.agendamento.data.security;
+package com.adjt.agendamento.rest.security.service;
 
 import com.adjt.agendamento.core.util.MensagemUtil;
 import com.adjt.agendamento.data.repository.jpa.UsuarioRepository;
+import com.adjt.agendamento.rest.security.UsuarioPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

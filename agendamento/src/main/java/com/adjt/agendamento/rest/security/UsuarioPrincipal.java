@@ -1,4 +1,4 @@
-package com.adjt.agendamento.data.security;
+package com.adjt.agendamento.rest.security;
 
 import com.adjt.agendamento.data.entity.UsuarioEntity;
 import org.springframework.security.core.GrantedAuthority;
