@@ -1,9 +1,6 @@
 package com.adjt.agendamento.rest.dto.request;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +10,19 @@ import java.util.Set;
 @Setter
 public class UsuarioRequest {
 
+    @Positive(message = "O ID deve ser um número positivo maior que zero")
     Integer id;
 
     @NotBlank(message = "O nome não pode estar em branco")
     @Size(max = 50, message = "O nome deve ter no máximo 50 caracteres")
     private String nome;
+
+    @Size(max = 20, message = "O telefone deve ter no máximo 20 caracteres")
+    @Pattern(
+            regexp = "^\\(?[1-9]{2}\\)?\\s?9?[0-9]{4}[-\\s]?[0-9]{4}$",
+            message = "Telefone inválido. Formatos aceitos: (11) 91234-5678, 11912345678 ou 1134567890"
+    )
+    private String telefone;
 
     @NotBlank(message = "O e-mail não pode estar em branco")
     @Email(message = "O e-mail deve ser válido")

@@ -11,12 +11,11 @@ import java.util.Set;
 public class Usuario extends Base {
 
     private String nome;
+    private String telefone;
     private String email;
     private String senha;
     private Boolean ativo;
     private Set<Perfil> perfis;
-
-
 
     public boolean isMedico() {
         return perfis.stream().anyMatch(perfil -> "ROLE_MEDICO".equals(perfil.getNome()));

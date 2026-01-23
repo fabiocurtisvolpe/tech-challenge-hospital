@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface UsuarioRestMapper {
 
     @Mapping(target = "perfis", ignore = true)
+    @Mapping(target = "telefone", expression = "java(request.getTelefone() != null ? request.getTelefone().replaceAll(\"\\\\D\", \"\") : null)")
     Usuario toModel(UsuarioRequest request);
 
     UsuarioResponse toResponse(Usuario model);

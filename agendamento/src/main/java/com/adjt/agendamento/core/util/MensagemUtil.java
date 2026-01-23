@@ -15,9 +15,10 @@ public class MensagemUtil {
 
     public static final String PERMISSAO_NEGADA = "Usuário sem permissão.";
 
+    public static final String USUARIO_ID_VAZIO = "O id não pode ser vazio.";
     public static final String USUARIO_NOME_VAZIO = "O nome não pode ser vazio.";
+    public static final String USUARIO_TELEFONE_INVALIDO = "Telefone inválido.";
     public static final String USUARIO_EMAIL_INVALIDO = "E-mail inválido.";
-    public static final String USUARIO_EMAIL_NAO_PERMITIDO = "E-mail está sendo utilizado por outro usuário.";
     public static final String USUARIO_SENHA_VAZIO = "A senha não pode ser vazia.";
     public static final String USUARIO_PERFIL_VAZIO = "O usuário deve ter pelo menos um perfil.";
     public static final String USUARIO_PERFIL_INVALIDO = "O usuário deve possuir um perfil válido";

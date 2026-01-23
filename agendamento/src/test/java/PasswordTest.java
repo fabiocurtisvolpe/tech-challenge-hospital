@@ -17,7 +17,7 @@ class PasswordTest {
     @Test
     void gerarNovaSenha() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String novaSenha = "admin123";
+        String novaSenha = "paciente123";
         String hash = encoder.encode(novaSenha);
 
         System.out.println("=================================");

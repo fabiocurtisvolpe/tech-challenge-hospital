@@ -32,6 +32,7 @@ public class CadastrarUsuarioUseCase {
 
         Usuario novoUsuario = Usuario.builder()
                 .nome(usuario.getNome())
+                .telefone(usuario.getTelefone())
                 .email(usuario.getEmail())
                 .senha(usuario.getSenha())
                 .perfis(perfis)

@@ -17,11 +17,12 @@ public class ExcluirUsuarioUseCase {
         return new ExcluirUsuarioUseCase(usuarioPort);
     }
 
-    public Boolean run(Usuario usuario, String usuarioLogado) {
+    public Boolean run(Integer id, String usuarioLogado) {
 
         final Usuario usrLogado = UsuarioLogadoUtil.usuarioLogado(usuarioPort, usuarioLogado);
-        UsuarioValidator.validarPermissaoExcluir(usuario, usrLogado);
+        Usuario excluirUsuario = usuarioPort.obterPorId(id);
+        UsuarioValidator.validarPermissaoExcluir(excluirUsuario, usrLogado);
 
-        return usuarioPort.excluir(usuario.getId());
+        return usuarioPort.excluir(id);
     }
 }

@@ -12,7 +12,15 @@ import java.util.regex.Pattern;
 public class UsuarioValidator {
 
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
+    private static final String TELEFONE_REGEX = "^(\\(?[1-9]{2}\\)?\\s?)?(9?\\d{4}[-.\\s]?\\d{4})$";
+
     private static final List<String> PERFIS_PERMITIDOS = Arrays.asList("ROLE_MEDICO", "ROLE_ENFERMEIRO", "ROLE_PACIENTE", "ROLE_ADMIN");
+
+    public static void validarId(Usuario usuario) {
+        if (usuario.getId() == null) {
+            throw new IllegalArgumentException(MensagemUtil.USUARIO_ID_VAZIO);
+        }
+    }
 
     public static void validarCamposObrigatorios(Usuario usuario) {
 
@@ -35,6 +43,10 @@ public class UsuarioValidator {
         if (usuario.hasAnyRole(PERFIS_PERMITIDOS)) {
             throw new IllegalArgumentException(MensagemUtil.USUARIO_PERFIL_INVALIDO);
         }
+
+        if ((usuario.getTelefone() != null) && !Pattern.compile(TELEFONE_REGEX).matcher(usuario.getTelefone()).matches()) {
+            throw new IllegalArgumentException(MensagemUtil.USUARIO_TELEFONE_INVALIDO);
+        }
     }
 
     private static void validarPermissaoComum(Usuario usuario, Usuario usrLogado) {
@@ -56,14 +68,10 @@ public class UsuarioValidator {
 
     public static void validarPermissao(Usuario usuario, Usuario usrLogado) {
         validarPermissaoComum(usuario, usrLogado);
-
-        // 4. Segurança: Não permitir ação sobre o próprio e-mail logado (evitar auto alteração de perfil crítico)
-        if (Objects.equals(usuario.getEmail(), usrLogado.getEmail())) {
-            throw new IllegalArgumentException(MensagemUtil.USUARIO_EMAIL_NAO_PERMITIDO);
-        }
     }
 
     public static void validarPermissaoExcluir(Usuario usuario, Usuario usrLogado) {
+        validarId(usuario);
         validarPermissaoComum(usuario, usrLogado);
 
         // Regra de Segurança Adicional: Um utilizador não deve poder excluir a si

@@ -19,6 +19,9 @@ public class UsuarioEntity extends BaseEntity {
     @Column(name = "nome",  nullable = false, length = 50)
     private String nome;
 
+    @Column(name = "telefone", length = 20)
+    private String telefone;
+
     @Column(name = "email",  nullable = false, length = 50)
     private String email;
 

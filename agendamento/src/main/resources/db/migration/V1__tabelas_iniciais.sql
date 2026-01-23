@@ -13,6 +13,7 @@ create table if not exists tb_perfil (
 create table if not exists tb_usuario (
                                           id SERIAL primary key,
                                           nome VARCHAR(50) not null,
+                                          telefone VARCHAR(20) null,
     email VARCHAR(50) not null unique,
     senha VARCHAR(255) not null,
     dt_criacao TIMESTAMP not null default CURRENT_TIMESTAMP
@@ -68,6 +69,7 @@ create table if not exists tb_usuario_aud (
                                               rev INTEGER not null,
                                               revtype smallint not null,
                                               nome VARCHAR(50),
+                                              telefone VARCHAR(20),
     email VARCHAR(50),
     senha VARCHAR(255),
     dt_criacao TIMESTAMP,
@@ -118,15 +120,51 @@ values ('ROLE_MEDICO'),
     on
 conflict (nome) do nothing;
 
--- Inserção de usuario (Senha: 123456 - Hash BCrypt)
-INSERT INTO tb_usuario (nome, email, senha)
-VALUES ('Administrador Sistema', 'admin@hospital.com', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DM99S6N6.S8.')
+-- Inserção de usuario (Senha: admin123)
+INSERT INTO tb_usuario (nome, telefone, email, senha)
+VALUES ('Administrador Sistema', '19991944381', 'admin@hospital.com', '$2a$10$ygJjVVy907BquXwKzzvKiubmdJKJBTk.K/NpId5w88i1PAEE3p6D6')
 ON CONFLICT (email) DO NOTHING;
 
 -- 2. Vincular o usuário ao perfil ROLE_ADMIN
--- ROLE_ADMIN que pode criar mérido e enfermeiro
+-- ROLE_ADMIN que pode criar médico e enfermeiro
 INSERT INTO tb_usuario_perfil (usuario_id, perfil_id)
 SELECT
     (SELECT id FROM tb_usuario WHERE email = 'admin@hospital.com'),
     (SELECT id FROM tb_perfil WHERE nome = 'ROLE_ADMIN')
     ON CONFLICT (usuario_id, perfil_id) DO NOTHING;
+
+-- Inserção de usuario (Senha: medico123)
+INSERT INTO tb_usuario (nome, telefone, email, senha)
+VALUES ('Médico','19991944382', 'medico@hospital.com', '$2a$10$yZYXGGDm/DAL3FnBu2AgkOWeu68/zCdWHpMWAgbh72pAGtktyB5pW')
+ON CONFLICT (email) DO NOTHING;
+
+-- 2. Vincular o usuário ao perfil ROLE_MEDICO
+INSERT INTO tb_usuario_perfil (usuario_id, perfil_id)
+SELECT
+    (SELECT id FROM tb_usuario WHERE email = 'medico@hospital.com'),
+    (SELECT id FROM tb_perfil WHERE nome = 'ROLE_MEDICO')
+ON CONFLICT (usuario_id, perfil_id) DO NOTHING;
+
+-- Inserção de usuario (Senha: enfermeiro123)
+INSERT INTO tb_usuario (nome, telefone, email, senha)
+VALUES ('Enfermeiro','19991944383', 'enfermeiro@hospital.com', '$2a$10$Wr.zZm1u98yBoBa5ANSsXO10w1k.9vF728g2oqUvASrAKN3pdTcIW')
+ON CONFLICT (email) DO NOTHING;
+
+-- 2. Vincular o usuário ao perfil ROLE_ENFERMEIRO
+INSERT INTO tb_usuario_perfil (usuario_id, perfil_id)
+SELECT
+    (SELECT id FROM tb_usuario WHERE email = 'enfermeiro@hospital.com'),
+    (SELECT id FROM tb_perfil WHERE nome = 'ROLE_ENFERMEIRO')
+ON CONFLICT (usuario_id, perfil_id) DO NOTHING;
+
+-- Inserção de usuario (Senha: paciente123)
+INSERT INTO tb_usuario (nome, telefone, email, senha)
+VALUES ('Paciente','19991944384', 'paciente@gmail.com', '$2a$10$gdrnnk8WgXEsaHEXeV518eZgRV72JpmdlXfi855x0dkWifCEAVbdK')
+ON CONFLICT (email) DO NOTHING;
+
+-- 2. Vincular o usuário ao perfil ROLE_ENFERMEIRO
+INSERT INTO tb_usuario_perfil (usuario_id, perfil_id)
+SELECT
+    (SELECT id FROM tb_usuario WHERE email = 'enfermeiro@hospital.com'),
+    (SELECT id FROM tb_perfil WHERE nome = 'ROLE_PACIENTE')
+ON CONFLICT (usuario_id, perfil_id) DO NOTHING;
