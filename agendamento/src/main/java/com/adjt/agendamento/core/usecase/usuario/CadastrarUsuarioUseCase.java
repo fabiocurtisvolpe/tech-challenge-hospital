@@ -40,8 +40,8 @@ public class CadastrarUsuarioUseCase {
 
         final Usuario usrLogado = UsuarioLogadoUtil.usuarioLogado(usuarioPort, usuarioLogado);
         UsuarioValidator.validarPermissao(novoUsuario, usrLogado);
-        UsuarioValidator.validarCamposObrigatorios(usuario);
+        UsuarioValidator.validarCamposObrigatorios(novoUsuario);
 
-        return usuarioPort.criar(usuario);
+        return usuarioPort.criar(novoUsuario);
     }
 }

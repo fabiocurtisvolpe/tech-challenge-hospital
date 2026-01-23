@@ -1,28 +1,28 @@
 package com.adjt.agendamento.rest.security.util;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.jwt.Jwt;
 
 public class UsuarioLogadoUtil {
 
     public static String getUsuarioLogado() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof Jwt jwt) {
+            return jwt.getSubject();
+        }
 
         if (principal instanceof UserDetails userDetails) {
             return userDetails.getUsername();
-        } else {
-            return principal.toString();
-        }
-    }
-
-    public static boolean temPermissao() {
-        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities()
-                .contains(new SimpleGrantedAuthority("ROLE_DONO_RESTURANTE"))) {
-            return true;
         }
 
-        return false;
+        return principal.toString();
     }
-
 }

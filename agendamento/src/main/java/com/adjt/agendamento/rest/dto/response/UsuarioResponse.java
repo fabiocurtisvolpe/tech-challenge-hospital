@@ -1,8 +1,15 @@
 package com.adjt.agendamento.rest.dto.response;
 
-public class UsuarioResponse {
+import lombok.Getter;
+import lombok.Setter;
 
-    Integer id;
-    String nome;
-    String email;
+import java.io.Serializable;
+
+@Getter
+@Setter
+public class UsuarioResponse implements Serializable {
+
+    private Integer id;
+    private String nome;
+    private String email;
 }
