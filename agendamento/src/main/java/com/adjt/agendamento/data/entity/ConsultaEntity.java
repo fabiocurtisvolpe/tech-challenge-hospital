@@ -28,11 +28,11 @@ public class ConsultaEntity extends BaseEntity {
     private UsuarioEntity paciente;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medico_id", nullable = false)
+    @JoinColumn(name = "medico_id")
     private UsuarioEntity medico;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "enfermeiro_id", nullable = false)
+    @JoinColumn(name = "enfermeiro_id")
     private UsuarioEntity enfermeiro;
 
     @ManyToOne(fetch = FetchType.LAZY)

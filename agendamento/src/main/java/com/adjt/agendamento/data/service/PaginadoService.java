@@ -1,19 +1,18 @@
 package com.adjt.agendamento.data.service;
 
-import java.util.List;
-
 import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
 import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
 import com.adjt.agendamento.core.enums.FiltroOperadorEnum;
 import com.adjt.agendamento.data.mapper.EntityMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import jakarta.transaction.Transactional;
+import java.util.List;
 
 public class PaginadoService<E, D> {
 

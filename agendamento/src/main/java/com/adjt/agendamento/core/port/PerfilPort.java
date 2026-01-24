@@ -5,7 +5,6 @@ import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public interface PerfilPort<Perfil> {

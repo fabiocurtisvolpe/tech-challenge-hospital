@@ -18,7 +18,7 @@ public class UsuarioValidator {
 
     public static void validarId(Usuario usuario) {
         if (usuario.getId() == null) {
-            throw new IllegalArgumentException(MensagemUtil.USUARIO_ID_VAZIO);
+            throw new IllegalArgumentException(MensagemUtil.ID_VAZIO);
         }
     }
 
