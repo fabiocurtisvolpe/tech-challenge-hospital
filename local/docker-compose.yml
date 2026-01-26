@@ -1,5 +1,5 @@
 services:
-  postgres:
+  postgres_agendamento:
     build: .
     image: postgres:17
     container_name: my_agendamento_db
@@ -19,5 +19,26 @@ services:
       retries: 5
       start_period: 30s
 
+  postgres_notificacao:
+    build: .
+    image: postgres:17
+    container_name: my_notificacao_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER_NOTIFICACAO:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_NOTIFICACAO:-secret}
+      POSTGRES_DB: ${POSTGRES_DB_NOTIFICACAO:-notificacao}
+    ports:
+      - "5433:5432"
+    volumes:
+      - notificacao_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_NOTIFICACAO:-admin} -d ${POSTGRES_DB_NOTIFICACAO:-notificacao}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
 volumes:
   agendamento_pg_data:
+  notificacao_pg_data:
