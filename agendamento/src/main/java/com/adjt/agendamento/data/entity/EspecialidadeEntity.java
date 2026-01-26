@@ -28,8 +28,8 @@ public class EspecialidadeEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_medico_especialidade",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "especialidade_id")
+            joinColumns = @JoinColumn(name = "especialidade_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
     private Set<UsuarioEntity> medicos = new HashSet<>();
 

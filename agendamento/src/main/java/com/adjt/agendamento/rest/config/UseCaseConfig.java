@@ -1,9 +1,11 @@
 package com.adjt.agendamento.rest.config;
 
 import com.adjt.agendamento.core.model.Consulta;
+import com.adjt.agendamento.core.model.Especialidade;
 import com.adjt.agendamento.core.model.Perfil;
 import com.adjt.agendamento.core.model.Usuario;
 import com.adjt.agendamento.core.port.ConsultaPort;
+import com.adjt.agendamento.core.port.EspecialidadePort;
 import com.adjt.agendamento.core.port.PerfilPort;
 import com.adjt.agendamento.core.port.UsuarioPort;
 import com.adjt.agendamento.core.usecase.consulta.*;
@@ -54,8 +56,9 @@ public class UseCaseConfig {
 
     @Bean
     public CadastrarConsultaUseCase cadastrarConsultaUseCase(ConsultaPort<Consulta> consultaPort,
-                                                             UsuarioPort<Usuario> usuarioPort) {
-        return CadastrarConsultaUseCase.create(consultaPort, usuarioPort);
+                                                             UsuarioPort<Usuario> usuarioPort,
+                                                             EspecialidadePort<Especialidade> especialidadePort) {
+        return CadastrarConsultaUseCase.create(consultaPort, usuarioPort, especialidadePort);
     }
 
     @Bean
@@ -71,7 +74,7 @@ public class UseCaseConfig {
     }
 
     @Bean
-    public PaginadoConsultaUseCase<Consulta> paginadoUsuarioUseCase(ConsultaPort<Consulta> consultaPort,
+    public PaginadoConsultaUseCase<Consulta> paginadoConsultaUseCase(ConsultaPort<Consulta> consultaPort,
                                                                     UsuarioPort<Usuario> usuarioPort) {
         return PaginadoConsultaUseCase.create(consultaPort, usuarioPort);
     }

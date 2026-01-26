@@ -15,7 +15,7 @@ public class ConsultaResponse implements Serializable {
     private String diagnostico;
     private String prescricao;
     private UsuarioResponse paciente;
-    private Integer medicoId;
-    private Integer enfermeiroId;
-    private Integer especialidadeId;
+    private GenericResponse medico;
+    private GenericResponse enfermeiro;
+    private GenericResponse especialidade;
 }

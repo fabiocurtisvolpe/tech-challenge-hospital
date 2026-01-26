@@ -15,7 +15,7 @@ public class ConsultaValidator {
     
     public static void validarPermissao(Usuario usrLogado) {
 
-        if (usrLogado.isPaciente() || usrLogado.isAdmin()) {
+        if (usrLogado.isSomentePaciente()) {
             throw new NotificacaoException(MensagemUtil.PERMISSAO_NEGADA);
         }
     }

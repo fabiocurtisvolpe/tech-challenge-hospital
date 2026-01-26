@@ -33,6 +33,14 @@ public class Usuario extends Base {
         return perfis.stream().anyMatch(perfil -> "ROLE_ADMIN".equals(perfil.getNome()));
     }
 
+    public boolean isSomentePaciente() {
+        return isPaciente() && (perfis != null && perfis.size() == 1);
+    }
+
+    public boolean isEquipeOuAdmin() {
+        return isAdmin() || isMedico() || isEnfermeiro();
+    }
+
     public boolean hasRole(String role) {
         return perfis != null && perfis.stream()
                 .anyMatch(p -> role.equalsIgnoreCase(p.getNome()));
