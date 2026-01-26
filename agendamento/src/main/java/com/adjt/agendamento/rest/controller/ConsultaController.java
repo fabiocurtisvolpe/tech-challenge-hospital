@@ -1,16 +1,16 @@
 package com.adjt.agendamento.rest.controller;
 
 import com.adjt.agendamento.core.model.Consulta;
+import com.adjt.agendamento.core.model.Usuario;
 import com.adjt.agendamento.core.usecase.consulta.*;
 import com.adjt.agendamento.rest.dto.request.ConsultaRequest;
+import com.adjt.agendamento.rest.dto.request.UsuarioRequest;
 import com.adjt.agendamento.rest.dto.response.ConsultaResponse;
+import com.adjt.agendamento.rest.dto.response.UsuarioResponse;
 import com.adjt.agendamento.rest.mapper.ConsultaRestMapper;
 import com.adjt.agendamento.rest.security.util.UsuarioLogadoUtil;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/consulta")
@@ -49,6 +49,23 @@ public class ConsultaController {
         Integer especialidadeId  = consultaRequest.getEspecialidadeId();
 
         Consulta resp = this.cadastrarConsultaUseCase.run(consulta,
+                pacienteId, medicadoId, enfermeiroId, especialidadeId,
+                UsuarioLogadoUtil.getUsuarioLogado());
+
+        return consultaRestMapper.toResponse(resp);
+    }
+
+    @PutMapping
+    public ConsultaResponse atualizar(@RequestBody @Valid ConsultaRequest consultaRequest) {
+
+        Consulta consulta = this.consultaRestMapper.toModel(consultaRequest);
+
+        Integer pacienteId = consultaRequest.getPacienteId();
+        Integer medicadoId = consultaRequest.getMedicadoId();
+        Integer enfermeiroId  = consultaRequest.getEnfermeiroId();
+        Integer especialidadeId  = consultaRequest.getEspecialidadeId();
+
+        Consulta resp = this.atualizarConsultaUseCase.run(consulta,
                 pacienteId, medicadoId, enfermeiroId, especialidadeId,
                 UsuarioLogadoUtil.getUsuarioLogado());
 

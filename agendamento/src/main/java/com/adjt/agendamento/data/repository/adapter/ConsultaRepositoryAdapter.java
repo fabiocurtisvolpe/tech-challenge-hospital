@@ -15,8 +15,10 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Repository
 public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
@@ -69,6 +71,14 @@ public class ConsultaRepositoryAdapter implements ConsultaPort<Consulta> {
                 .orElseThrow(() -> new EntityNotFoundException(MensagemUtil.CONSULTA_NAO_ENCONTRADA));
 
         return consultaMapper.toModel(entity);
+    }
+
+    @Override
+    @Transactional
+    public List<Consulta> listarPorMedicoEIntervalo(Integer medicoId, LocalDateTime inicio, LocalDateTime fim) {
+        return consultaRepository.findByMedicoAndIntervalo(medicoId, inicio, fim).stream()
+                        .map(consultaMapper::toModel)
+                .collect(Collectors.toList());
     }
 
     @Override

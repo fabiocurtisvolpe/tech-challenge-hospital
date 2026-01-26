@@ -5,6 +5,8 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 @Getter
 @SuperBuilder
 public class Consulta extends Base {
@@ -16,4 +18,14 @@ public class Consulta extends Base {
     protected Usuario medico;
     protected Usuario enfermeiro;
     protected Especialidade especialidade;
+
+    public boolean temConflitoHorario(Consulta outra) {
+        if (this.dataHora == null || outra.getDataHora() == null) {
+            return false;
+        }
+
+        long minutosDeDiferenca = Math.abs(MINUTES.between(this.dataHora, outra.getDataHora()));
+
+        return minutosDeDiferenca < 30;
+    }
 }

@@ -10,6 +10,8 @@ import com.adjt.agendamento.core.util.UsuarioLogadoUtil;
 import com.adjt.agendamento.core.validator.ConsultaValidator;
 import jakarta.persistence.EntityNotFoundException;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 public class CadastrarConsultaUseCase {
@@ -71,7 +73,17 @@ public class CadastrarConsultaUseCase {
                 .especialidade(especialidade)
                 .build();
 
+        LocalDateTime inicioDia = novaConsulta.getDataHora().toLocalDate().atStartOfDay();
+        LocalDateTime fimDia = novaConsulta.getDataHora().toLocalDate().atTime(23, 59, 59);
+
+        List<Consulta> consultasDoDia = consultaPort.listarPorMedicoEIntervalo(
+                novaConsulta.getMedico().getId(),
+                inicioDia,
+                fimDia
+        );
+
         ConsultaValidator.validarCamposObrigatorios(novaConsulta);
+        ConsultaValidator.validarConflitoMedico(novaConsulta, consultasDoDia);
 
         return consultaPort.criar(novaConsulta);
     }

@@ -63,8 +63,9 @@ public class UseCaseConfig {
 
     @Bean
     public AtualizarConsultaUseCase atualizarConsultaUseCase(ConsultaPort<Consulta> consultaPort,
-                                                             UsuarioPort<Usuario> usuarioPort) {
-        return AtualizarConsultaUseCase.create(consultaPort, usuarioPort);
+                                                             UsuarioPort<Usuario> usuarioPort,
+                                                             EspecialidadePort<Especialidade> especialidadePort) {
+        return AtualizarConsultaUseCase.create(consultaPort, usuarioPort, especialidadePort);
     }
 
     @Bean

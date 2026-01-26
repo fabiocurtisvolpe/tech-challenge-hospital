@@ -26,4 +26,5 @@ public class MensagemUtil {
     public static final String CONSULTA_PACIENTE_VAZIO = "O paciente não pode ser vazio.";
     public static final String CONSULTA_ESPECIALIDADE_VAZIO = "A especialidade não pode ser vazia.";
     public static final String CONSULTA_MEDICO_VAZIO = "O médico não pode ser vazio.";
+    public static final String CONSULTA_CONFLITO_HORARIO = "O médico já possui uma consulta em um intervalo menor que 30 minutos.";
 }
