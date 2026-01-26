@@ -1,12 +1,11 @@
 package com.adjt.agendamento.rest.controller;
 
+import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
 import com.adjt.agendamento.core.model.Consulta;
-import com.adjt.agendamento.core.model.Usuario;
 import com.adjt.agendamento.core.usecase.consulta.*;
 import com.adjt.agendamento.rest.dto.request.ConsultaRequest;
-import com.adjt.agendamento.rest.dto.request.UsuarioRequest;
+import com.adjt.agendamento.rest.dto.request.PaginacaoRequest;
 import com.adjt.agendamento.rest.dto.response.ConsultaResponse;
-import com.adjt.agendamento.rest.dto.response.UsuarioResponse;
 import com.adjt.agendamento.rest.mapper.ConsultaRestMapper;
 import com.adjt.agendamento.rest.security.util.UsuarioLogadoUtil;
 import jakarta.validation.Valid;
@@ -70,5 +69,36 @@ public class ConsultaController {
                 UsuarioLogadoUtil.getUsuarioLogado());
 
         return consultaRestMapper.toResponse(resp);
+    }
+
+    @GetMapping("/{id}")
+    public ConsultaResponse obter(@PathVariable @Valid Integer id) {
+
+        Consulta resp = this.obterPorIdConsultaUseCase.run(id,  UsuarioLogadoUtil.getUsuarioLogado());
+        return consultaRestMapper.toResponse(resp);
+    }
+
+    @DeleteMapping("/{id}")
+    public Boolean excluir(@PathVariable Integer id) {
+        return this.excluirConsultaUseCase.run(id,  UsuarioLogadoUtil.getUsuarioLogado());
+    }
+
+    @PostMapping("/paginado")
+    public ResultadoPaginacaoDTO<ConsultaResponse> paginado(@RequestBody @Valid PaginacaoRequest paginacao) {
+
+        ResultadoPaginacaoDTO<Consulta> resultado = this.paginadoConsultaUseCase.run(
+                paginacao.getPagina(),
+                paginacao.getQtdPagina(),
+                paginacao.getFiltros(),
+                paginacao.getOrdenacao(),
+                UsuarioLogadoUtil.getUsuarioLogado());
+
+        return new ResultadoPaginacaoDTO<>(
+                resultado.getContent().stream()
+                        .map(this.consultaRestMapper::toResponse)
+                        .toList(),
+                resultado.getPageNumber(),
+                resultado.getPageSize(),
+                resultado.getTotalElements());
     }
 }
