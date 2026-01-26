@@ -11,7 +11,7 @@ import java.util.Set;
 public class UsuarioRequest {
 
     @Positive(message = "O ID deve ser um número positivo maior que zero")
-    Integer id;
+    private Integer id;
 
     @NotBlank(message = "O nome não pode estar em branco")
     @Size(max = 50, message = "O nome deve ter no máximo 50 caracteres")
