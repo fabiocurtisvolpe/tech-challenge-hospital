@@ -1,3 +1,8 @@
+create table if not exists revinfo (
+                                       rev SERIAL primary key,
+                                       revtstmp BIGINT
+);
+
 -- =============================================================================
 -- 1. TABELA PRINCIPAL: tb_notificacao
 -- =============================================================================

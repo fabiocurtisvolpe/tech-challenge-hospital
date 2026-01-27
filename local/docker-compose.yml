@@ -29,7 +29,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_NOTIFICACAO:-secret}
       POSTGRES_DB: ${POSTGRES_DB_NOTIFICACAO:-notificacao}
     ports:
-      - "5433:5433"
+      - "5433:5432"
     volumes:
       - notificacao_pg_data:/var/lib/postgresql/data
     healthcheck:
