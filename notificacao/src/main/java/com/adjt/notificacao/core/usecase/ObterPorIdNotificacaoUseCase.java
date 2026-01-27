@@ -1,32 +1,21 @@
 package com.adjt.notificacao.core.usecase;
 
-import com.adjt.agendamento.core.model.Consulta;
-import com.adjt.agendamento.core.model.Usuario;
-import com.adjt.agendamento.core.port.ConsultaPort;
-import com.adjt.agendamento.core.port.UsuarioPort;
-import com.adjt.agendamento.core.util.UsuarioLogadoUtil;
-import com.adjt.agendamento.core.validator.ConsultaValidator;
+import com.adjt.notificacao.core.model.Notificacao;
+import com.adjt.notificacao.core.port.NotificacaoPort;
 
 public class ObterPorIdNotificacaoUseCase {
 
-    private final ConsultaPort<Consulta> consultaPort;
-    private final UsuarioPort<Usuario> usuarioPort;
+    private final NotificacaoPort<Notificacao> notificacaoPort;
 
-    private ObterPorIdNotificacaoUseCase(ConsultaPort<Consulta> consultaPort,
-                                         UsuarioPort<Usuario> usuarioPort) {
-        this.consultaPort = consultaPort;
-        this.usuarioPort = usuarioPort;
+    private ObterPorIdNotificacaoUseCase(NotificacaoPort<Notificacao> notificacaoPort) {
+        this.notificacaoPort = notificacaoPort;
     }
 
-    public static ObterPorIdNotificacaoUseCase create(ConsultaPort<Consulta> consultaPort,
-                                                      UsuarioPort<Usuario> usuarioPort) {
-        return new ObterPorIdNotificacaoUseCase(consultaPort, usuarioPort);
+    public static ObterPorIdNotificacaoUseCase create(NotificacaoPort<Notificacao> notificacaoPort) {
+        return new ObterPorIdNotificacaoUseCase(notificacaoPort);
     }
 
-    public Consulta run(Integer id, String usuarioLogado) {
-
-        final Usuario usrLogado = UsuarioLogadoUtil.usuarioLogado(usuarioPort, usuarioLogado);
-        ConsultaValidator.validarPermissao(usrLogado);
-        return consultaPort.obterPorId(id);
+    public Notificacao run(Integer id) {
+        return notificacaoPort.obterPorId(id);
     }
 }

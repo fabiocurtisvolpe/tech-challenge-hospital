@@ -3,7 +3,6 @@ package com.adjt.agendamento.core.port;
 import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
 import com.adjt.agendamento.core.dto.filtro.FilterDTO;
 import com.adjt.agendamento.core.dto.filtro.SortDTO;
-import com.adjt.agendamento.data.entity.ConsultaEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

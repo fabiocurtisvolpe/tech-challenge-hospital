@@ -8,7 +8,7 @@ public class MensagemUtil {
 
     public static final String CONSULTA_NAO_ENCONTRADA = "Consulta não encontrada.";
     public static final String ESPECIALIDADE_NAO_ENCONTRADA = "Especialidade não encontrada.";
-    public static final String NOTIFICACAO_NAO_ENCONTRADA = "Notificação não encontrada.";
+
     public static final String PERFIL_NAO_ENCONTRADO = "Perfil não encontrado.";
     public static final String USUARIO_NAO_ENCONTRADO = "Usuário não encontrado.";
     public static final String USUARIO_LOGADO_NAO_ENCONTRADO = "Usuário logado não encontrado.";

@@ -1,6 +1,6 @@
-package com.adjt.agendamento.data.repository.jpa;
+package com.adjt.notificacao.data.repository.jpa;
 
-import com.adjt.agendamento.data.entity.NotificacaoEntity;
+import com.adjt.notificacao.data.entity.NotificacaoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

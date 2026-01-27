@@ -1,80 +1,26 @@
 package com.adjt.notificacao.core.usecase;
 
-import com.adjt.agendamento.core.model.Consulta;
-import com.adjt.agendamento.core.model.Especialidade;
-import com.adjt.agendamento.core.model.Usuario;
-import com.adjt.agendamento.core.port.ConsultaPort;
-import com.adjt.agendamento.core.port.EspecialidadePort;
-import com.adjt.agendamento.core.port.UsuarioPort;
-import com.adjt.agendamento.core.util.UsuarioLogadoUtil;
-import com.adjt.agendamento.core.validator.ConsultaValidator;
-import jakarta.persistence.EntityNotFoundException;
-
-import java.util.Objects;
+import com.adjt.notificacao.core.model.Notificacao;
+import com.adjt.notificacao.core.port.NotificacaoPort;
+import com.adjt.notificacao.core.validator.NotificacaoValidator;
 
 public class AtualizarNotificacaoUseCase {
 
-    private final ConsultaPort<Consulta> consultaPort;
-    private final UsuarioPort<Usuario> usuarioPort;
-    private final EspecialidadePort<Especialidade> especialidadePort;
+    private final NotificacaoPort<Notificacao> notificacaoPort;
 
-    private AtualizarNotificacaoUseCase(ConsultaPort<Consulta> consultaPort,
-                                        UsuarioPort<Usuario> usuarioPort,
-                                        EspecialidadePort<Especialidade> especialidadePort) {
-        this.consultaPort = consultaPort;
-        this.usuarioPort = usuarioPort;
-        this.especialidadePort = especialidadePort;
+    private AtualizarNotificacaoUseCase(NotificacaoPort<Notificacao> notificacaoPort) {
+        this.notificacaoPort = notificacaoPort;
     }
 
-    public static AtualizarNotificacaoUseCase create(ConsultaPort<Consulta> consultaPort,
-                                                     UsuarioPort<Usuario> usuarioPort,
-                                                     EspecialidadePort<Especialidade> especialidadePort) {
-        return new AtualizarNotificacaoUseCase(consultaPort, usuarioPort, especialidadePort);
+    public static AtualizarNotificacaoUseCase create(NotificacaoPort<Notificacao> notificacaoPort) {
+        return new AtualizarNotificacaoUseCase(notificacaoPort);
     }
 
-    public Consulta run(Consulta consulta,
-                        Integer pacienteId,
-                        Integer medicadoId,
-                        Integer enfermeiroId,
-                        Integer especialidadeId,
-                        String usuarioLogado) {
+    public Notificacao run(Notificacao notificacao) {
 
-        final Usuario usrLogado = UsuarioLogadoUtil.usuarioLogado(usuarioPort, usuarioLogado);
+        NotificacaoValidator.validarId(notificacao);
+        NotificacaoValidator.validarCamposObrigatorios(notificacao);
 
-        Usuario enfermeiro = null;
-        Usuario paciente = this.usuarioPort.obterPorId(pacienteId);
-        Usuario medico = this.usuarioPort.obterPorId(medicadoId);
-        Especialidade especialidade = this.especialidadePort.obterPorId(especialidadeId);
-
-        if (enfermeiroId != null) {
-            try {
-                enfermeiro = this.usuarioPort.obterPorId(enfermeiroId);
-            } catch (EntityNotFoundException _) {
-            }
-        }
-
-        if (Objects.isNull(enfermeiro)) {
-            if (usrLogado.isEnfermeiro()) {
-                enfermeiro = usrLogado;
-            }
-        }
-
-        Consulta atualizarConsulta = Consulta.builder()
-                .id(consulta.getId())
-                .dataHora(consulta.getDataHora())
-                .diagnostico(consulta.getDiagnostico())
-                .prescricao(consulta.getPrescricao())
-                .paciente(paciente)
-                .medico(medico)
-                .enfermeiro(enfermeiro)
-                .especialidade(especialidade)
-                .build();
-
-        ConsultaValidator.validarPermissao(usrLogado);
-
-        ConsultaValidator.validarId(atualizarConsulta);
-        ConsultaValidator.validarCamposObrigatorios(atualizarConsulta);
-
-        return consultaPort.atualizar(atualizarConsulta);
+        return notificacaoPort.atualizar(notificacao);
     }
 }

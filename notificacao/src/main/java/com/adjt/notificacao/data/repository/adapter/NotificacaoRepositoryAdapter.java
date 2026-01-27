@@ -1,11 +1,11 @@
-package com.adjt.agendamento.data.repository.adapter;
+package com.adjt.notificacao.data.repository.adapter;
 
-import com.adjt.agendamento.core.model.Notificacao;
-import com.adjt.agendamento.core.port.NotificacaoPort;
-import com.adjt.agendamento.core.util.MensagemUtil;
-import com.adjt.agendamento.data.entity.NotificacaoEntity;
-import com.adjt.agendamento.data.mapper.NotificacaoMapper;
-import com.adjt.agendamento.data.repository.jpa.NotificacaoRepository;
+import com.adjt.notificacao.core.model.Notificacao;
+import com.adjt.notificacao.core.port.NotificacaoPort;
+import com.adjt.notificacao.core.util.MensagemUtil;
+import com.adjt.notificacao.data.entity.NotificacaoEntity;
+import com.adjt.notificacao.data.mapper.NotificacaoMapper;
+import com.adjt.notificacao.data.repository.jpa.NotificacaoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
