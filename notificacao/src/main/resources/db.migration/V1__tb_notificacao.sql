@@ -5,9 +5,11 @@ CREATE TABLE IF NOT EXISTS tb_notificacao (
                                               id SERIAL PRIMARY KEY,
                                               dt_criacao TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
                                               data_hora TIMESTAMP NOT NULL,
-                                              consulta_id INTEGER NOT NULL,
-                                              CONSTRAINT fk_notificacao_consulta FOREIGN KEY (consulta_id)
-    REFERENCES tb_consulta(id) ON DELETE CASCADE
+                                              nome_paciente VARCHAR(50) NOT NULL,
+                                              telefone_paciente VARCHAR(20) NOT NULL,
+                                              email_paciente VARCHAR(50) NOT NULL unique,
+                                              nome_medico VARCHAR(50) NOT NULL,
+                                              especialidade VARCHAR(100) NOT NULL
     );
 
 -- =============================================================================
@@ -19,8 +21,11 @@ CREATE TABLE IF NOT EXISTS tb_notificacao_aud (
                                                   revtype SMALLINT NOT NULL, -- 0 (insert), 1 (update), 2 (delete)
                                                   dt_criacao TIMESTAMP,
                                                   data_hora TIMESTAMP,
-                                                  consulta_id INTEGER,
-
+                                                  nome_paciente VARCHAR(50),
+                                                  telefone_paciente VARCHAR(20),
+                                                  email_paciente VARCHAR(50),
+                                                  nome_medico VARCHAR(50),
+                                                  especialidade VARCHAR(100),
                                                   PRIMARY KEY (id, rev),
     CONSTRAINT fk_notificacao_aud_revinfo FOREIGN KEY (rev)
     REFERENCES revinfo(rev)

@@ -1,4 +1,4 @@
-package com.adjt.agendamento.core.port;
+package com.adjt.notificacao.core.port;
 
 import java.util.List;
 
