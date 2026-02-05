@@ -1,4 +1,5 @@
 services:
+  # --- Banco de Dados Agendamento ---
   postgres_agendamento:
     build: .
     image: postgres:17
@@ -12,6 +13,8 @@ services:
       - "5434:5432"
     volumes:
       - agendamento_pg_data:/var/lib/postgresql/data
+    networks:
+      - fase3net
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-admin} -d ${POSTGRES_DB:-agendamento}"]
       interval: 10s
@@ -19,6 +22,7 @@ services:
       retries: 5
       start_period: 10s
 
+  # --- Banco de Dados Notificação ---
   postgres_notificacao:
     build: .
     image: postgres:17
@@ -32,6 +36,8 @@ services:
       - "5433:5432"
     volumes:
       - notificacao_pg_data:/var/lib/postgresql/data
+    networks:
+      - fase3net
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_NOTIFICACAO:-admin} -d ${POSTGRES_DB_NOTIFICACAO:-notificacao}"]
       interval: 10s
@@ -39,6 +45,27 @@ services:
       retries: 5
       start_period: 15s
 
+  # --- Aplicação Procpag ---
+  procpag:
+    image: docker.io/erickemprobr/procpag:latest
+    container_name: procpag_app
+    platform: linux/amd64
+    ports:
+      - "8089:8089"
+    networks:
+      - fase3net
+    depends_on:
+      postgres_agendamento:
+        condition: service_healthy
+      postgres_notificacao:
+        condition: service_healthy
+
+# --- Definição de Volumes Persistentes ---
 volumes:
   agendamento_pg_data:
   notificacao_pg_data:
+
+# --- Definição de Redes ---
+networks:
+  fase3net:
+    driver: bridge
