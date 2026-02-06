@@ -13,6 +13,7 @@
         <module>agendamento</module>
         <module>historico</module>
         <module>notificacao</module>
+        <module>pagamento</module>
     </modules>
 
 </project>

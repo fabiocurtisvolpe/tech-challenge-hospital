@@ -45,6 +45,29 @@ services:
       retries: 5
       start_period: 15s
 
+  # --- Banco de Dados Pagamento ---
+  postgres_pagamento:
+    build: .
+    image: postgres:17
+    container_name: my_pagamento_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER_PAGAMENTO:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_PAGAMENTO:-secret}
+      POSTGRES_DB: ${POSTGRES_DB_PAGAMENTO:-pagamento}
+    ports:
+      - "5435:5432"
+    volumes:
+      - pagamento_pg_data:/var/lib/postgresql/data
+    networks:
+      - fase3net
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER_PAGAMENTO:-admin} -d ${POSTGRES_DB_PAGAMENTO:-pagamento}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
   # --- Aplicação Procpag ---
   procpag:
     image: docker.io/erickemprobr/procpag:latest
@@ -59,11 +82,14 @@ services:
         condition: service_healthy
       postgres_notificacao:
         condition: service_healthy
+      postgres_pagamento:
+        condition: service_healthy
 
 # --- Definição de Volumes Persistentes ---
 volumes:
   agendamento_pg_data:
   notificacao_pg_data:
+  pagamento_pg_data:
 
 # --- Definição de Redes ---
 networks:
