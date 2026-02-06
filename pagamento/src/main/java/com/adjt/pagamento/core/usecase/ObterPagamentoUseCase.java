@@ -21,7 +21,7 @@ public class ObterPagamentoUseCase {
 
     public Pagamento run(Integer id) {
 
-        Pagamento pgto = this.pagamentoPort.obterPorId(id);
+        Pagamento pgto = this.pagamentoPort.obterPorContultaId(id);
 
         if (Objects.isNull(pgto)) {
             throw new NotificacaoException(MensagemUtil.PGTO_NAO_ENCONTRADO);

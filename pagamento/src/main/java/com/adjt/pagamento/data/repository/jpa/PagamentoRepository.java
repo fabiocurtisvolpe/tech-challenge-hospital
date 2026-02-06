@@ -6,9 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PagamentoRepository extends JpaRepository<PagamentoEntity, Integer> {
 
     @Query("SELECT p FROM PagamentoEntity p WHERE p.responseCode = :responseCode")
     List<PagamentoEntity> findByPagamentoResponseCode(Integer responseCode);
+
+    @Query("SELECT p FROM PagamentoEntity p WHERE p.idConsulta = :id")
+    Optional<PagamentoEntity> findByConsultaId(Integer id);
+
+    @Query("SELECT p FROM PagamentoEntity p WHERE p.responseCode != 200")
+    List<PagamentoEntity> findByPagamentoFalhou();
 }

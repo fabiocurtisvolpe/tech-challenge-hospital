@@ -9,21 +9,21 @@ import com.adjt.pagamento.core.validator.PagamentoValidator;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class AtualizarPagamentoUseCase {
+public class AtualizarPagamentoErroUseCase {
 
     private final PagamentoPort<Pagamento> pagamentoPort;
 
-    private AtualizarPagamentoUseCase(PagamentoPort<Pagamento> pagamentoPort) {
+    private AtualizarPagamentoErroUseCase(PagamentoPort<Pagamento> pagamentoPort) {
         this.pagamentoPort = pagamentoPort;
     }
 
-    public static AtualizarPagamentoUseCase create(PagamentoPort<Pagamento> pagamentoPort) {
-        return new AtualizarPagamentoUseCase(pagamentoPort);
+    public static AtualizarPagamentoErroUseCase create(PagamentoPort<Pagamento> pagamentoPort) {
+        return new AtualizarPagamentoErroUseCase(pagamentoPort);
     }
 
-    public Pagamento run(Integer id, Pagamento model) {
+    public void run(Integer id, int codigoErro) {
 
-        Pagamento pgto = this.pagamentoPort.obterPorId(id);
+        Pagamento pgto = this.pagamentoPort.obterPorContultaId(id);
 
         if (Objects.isNull(pgto)) {
             throw new NotificacaoException(MensagemUtil.PGTO_NAO_ENCONTRADO);
@@ -34,11 +34,11 @@ public class AtualizarPagamentoUseCase {
                 .dataHora(LocalDateTime.now())
                 .idConsulta(pgto.getIdConsulta())
                 .idPaciente(pgto.getIdPaciente())
-                .responseCode(pgto.getResponseCode())
-                .valor(model.getValor())
+                .responseCode(codigoErro)
+                .valor(pgto.getValor())
                 .build();
 
         PagamentoValidator.cadastarAtualizar(atualizarPgto);
-        return this.pagamentoPort.atualizar(atualizarPgto);
+        this.pagamentoPort.atualizar(atualizarPgto);
     }
 }
