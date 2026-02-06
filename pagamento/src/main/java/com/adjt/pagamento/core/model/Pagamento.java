@@ -1,17 +1,15 @@
 package com.adjt.pagamento.core.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class Pagamento implements Serializable {
 
