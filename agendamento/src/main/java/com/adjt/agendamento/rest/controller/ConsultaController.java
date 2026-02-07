@@ -3,7 +3,6 @@ package com.adjt.agendamento.rest.controller;
 import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
 import com.adjt.agendamento.core.model.Consulta;
 import com.adjt.agendamento.core.usecase.consulta.*;
-import com.adjt.agendamento.rest.dto.event.ConsultaCriadaEvent;
 import com.adjt.agendamento.rest.dto.request.ConsultaRequest;
 import com.adjt.agendamento.rest.dto.request.PaginacaoRequest;
 import com.adjt.agendamento.rest.dto.response.ConsultaResponse;

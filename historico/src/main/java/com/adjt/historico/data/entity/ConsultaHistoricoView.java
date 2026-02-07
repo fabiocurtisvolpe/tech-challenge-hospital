@@ -3,6 +3,7 @@ package com.adjt.historico.data.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.Immutable;
+
 import java.time.LocalDateTime;
 
 @Getter

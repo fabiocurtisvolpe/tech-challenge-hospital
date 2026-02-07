@@ -69,6 +69,11 @@ public class UseCaseConfig {
     }
 
     @Bean
+    public AtualizarStatusPagamentoConsultaUseCase atualizarStatusPagamentoConsultaUseCase(ConsultaPort<Consulta> consultaPort) {
+        return AtualizarStatusPagamentoConsultaUseCase.create(consultaPort);
+    }
+
+    @Bean
     public ExcluirConsultaUseCase excluirConsultaUseCase(ConsultaPort<Consulta> consultaPort,
                                                          UsuarioPort<Usuario> usuarioPort) {
         return ExcluirConsultaUseCase.create(consultaPort, usuarioPort);
@@ -76,7 +81,7 @@ public class UseCaseConfig {
 
     @Bean
     public PaginadoConsultaUseCase<Consulta> paginadoConsultaUseCase(ConsultaPort<Consulta> consultaPort,
-                                                                    UsuarioPort<Usuario> usuarioPort) {
+                                                                     UsuarioPort<Usuario> usuarioPort) {
         return PaginadoConsultaUseCase.create(consultaPort, usuarioPort);
     }
 }
