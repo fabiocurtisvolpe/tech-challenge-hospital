@@ -1,5 +1,6 @@
 package com.adjt.agendamento.core.usecase.consulta;
 
+import com.adjt.agendamento.core.enums.StatusPagamentoEnum;
 import com.adjt.agendamento.core.model.Consulta;
 import com.adjt.agendamento.core.model.Especialidade;
 import com.adjt.agendamento.core.model.Usuario;
@@ -72,6 +73,7 @@ public class CadastrarConsultaUseCase {
                 .enfermeiro(enfermeiro)
                 .especialidade(especialidade)
                 .valor(consulta.getValor())
+                .status(StatusPagamentoEnum.PENDENTE_PAGAMENTO)
                 .build();
 
         LocalDateTime inicioDia = novaConsulta.getDataHora().toLocalDate().atStartOfDay();

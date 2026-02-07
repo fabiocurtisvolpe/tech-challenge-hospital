@@ -57,6 +57,7 @@ public class ConsultaController {
                 pacienteId, medicadoId, enfermeiroId, especialidadeId,
                 UsuarioLogadoUtil.getUsuarioLogado());
 
+        this.agendamentoService.pagamento(resp.getId(), resp.getPaciente().getId(), resp.getValor());
         return consultaRestMapper.toResponse(resp);
     }
 

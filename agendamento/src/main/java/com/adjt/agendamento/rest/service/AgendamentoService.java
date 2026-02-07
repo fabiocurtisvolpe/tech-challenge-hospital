@@ -1,7 +1,10 @@
 package com.adjt.agendamento.rest.service;
 
+import com.adjt.agendamento.rest.dto.event.ConsultaCriadaEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 public class AgendamentoService {
@@ -12,19 +15,10 @@ public class AgendamentoService {
         this.rabbitTemplate = rabbitTemplate;
     }
 
+    public void pagamento(Integer idConsulta, Integer idPaciente, BigDecimal valor) {
 
-    /*
-    public void agendar(Consulta consulta) {
-        // 1. Salva no banco com status aguardando pagamento
-        consulta.setStatus(StatusConsulta.AGUARDANDO_PAGAMENTO);
-        repository.save(consulta);
+        ConsultaCriadaEvent event = new ConsultaCriadaEvent(idConsulta, idPaciente, valor);
 
-        // 2. Envia para a fila do RabbitMQ
-        ConsultaCriadaEvent event = new ConsultaCriadaEvent(
-                consulta.getId(), consulta.getPaciente().getId(), consulta.getValor()
-        );
         rabbitTemplate.convertAndSend("exchange.consulta", "routing.consulta.criada", event);
     }
-
-     */
 }

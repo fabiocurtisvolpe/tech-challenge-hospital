@@ -2,6 +2,7 @@ package com.adjt.pagamento.rest.service;
 
 import com.adjt.pagamento.core.usecase.AtualizarPagamentoErroUseCase;
 import com.adjt.pagamento.core.usecase.AtualizarPagamentoSucessoUseCase;
+import com.adjt.pagamento.rest.dto.event.ConsultaCriadaEvent;
 import com.adjt.pagamento.rest.dto.request.PagamentoRequest;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
@@ -33,27 +34,29 @@ public class MeioPagamentoService {
      */
     @Retryable(
             retryFor = { HttpServerErrorException.class, ResourceAccessException.class },
-            maxAttempts = 3,
+            maxAttempts = 5,
             backoff = @Backoff(delay = 5000, multiplier = 2.0)
     )
-    public void enviarRequisicaoPagamento(PagamentoRequest request) {
-        System.out.println("Tentando enviar pagamento ID: " + request.pagamento_id());
+    public void enviarRequisicaoPagamento(ConsultaCriadaEvent event) {
+        System.out.println("Tentando enviar pagamento ID: " + event.consultaId());
+
+        PagamentoRequest pagamentoRequest = new PagamentoRequest(event.valor(),
+                String.valueOf(event.consultaId()),
+                String.valueOf(event.pacienteId()));
 
         // Chamada para a API da imagem
         String API_URL = "http://localhost:8089//requisicao";
-        restTemplate.postForEntity(API_URL, request, Void.class);
+        restTemplate.postForEntity(API_URL, pagamentoRequest, Void.class);
 
-        // Se chegar aqui, deu certo. Atualizar o banco para "PROCESSADO"
-        atualizarStatusSucesso(request.pagamento_id());
+        // Atualizar o banco para "PROCESSADO"
+        atualizarStatusSucesso(event.consultaId());
     }
 
     /**
      * Se todas as 3 tentativas falharem, este método é chamado.
-     * Aqui você garante que a transação não seja perdida, marcando-a para
-     * ser processada por um Job (Scheduler) em background mais tarde.
      */
     @Recover
-    public void recover(Exception e, PagamentoRequest request) {
+    public void recover(Exception e, ConsultaCriadaEvent request) {
         int codigoErro = 0; // Padrão para erro desconhecido ou rede
 
         // Se o erro for do tipo HTTP (tem código 408, 502, etc)
@@ -66,14 +69,14 @@ public class MeioPagamentoService {
 
         System.err.println("Falha total. Salvando no banco com código: " + codigoErro);
 
-        marcarParaReprocessamentoPosterior(request.pagamento_id(), codigoErro);
+        marcarParaReprocessamentoPosterior(request.consultaId(), codigoErro);
     }
 
-    private void atualizarStatusSucesso(String id) {
-        this.atualizarPagamentoSucesso.run(Integer.parseInt(id));
+    private void atualizarStatusSucesso(Integer id) {
+        this.atualizarPagamentoSucesso.run(id);
     }
 
-    private void marcarParaReprocessamentoPosterior(String id, int codigoErro) {
-        this.atualizarPagamentoErro.run(Integer.parseInt(id), codigoErro);
+    private void marcarParaReprocessamentoPosterior(Integer id, int codigoErro) {
+        this.atualizarPagamentoErro.run(id, codigoErro);
     }
 }

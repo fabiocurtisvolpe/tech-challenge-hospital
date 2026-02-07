@@ -69,6 +69,7 @@ public class AtualizarConsultaUseCase {
                 .enfermeiro(enfermeiro)
                 .especialidade(especialidade)
                 .valor(consulta.getValor())
+                .status(consulta.getStatus())
                 .build();
 
         ConsultaValidator.validarPermissao(usrLogado);
