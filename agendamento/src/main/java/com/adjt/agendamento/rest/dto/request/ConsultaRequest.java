@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -38,4 +39,8 @@ public class ConsultaRequest {
     @Positive(message = "O ID especialidade deve ser um número positivo maior que zero")
     @NotNull(message = "O ID especialidade não pode estar em branco")
     private Integer especialidadeId;
+
+    @Positive(message = "O valor deve ser um número positivo maior que zero")
+    @NotNull(message = "O valor não pode estar em branco")
+    private BigDecimal valor;
 }

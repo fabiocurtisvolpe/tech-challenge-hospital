@@ -39,6 +39,10 @@ public class ConsultaValidator {
         if (consulta.getMedico() == null) {
             throw new IllegalArgumentException(MensagemUtil.CONSULTA_MEDICO_VAZIO);
         }
+
+        if (consulta.getValor() == null) {
+            throw new IllegalArgumentException(MensagemUtil.VALOR_VAZIO);
+        }
     }
 
     public static void validarConflitoMedico(Consulta novaConsulta, List<Consulta> consultasDoDia) {

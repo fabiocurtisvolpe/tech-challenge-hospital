@@ -1,10 +1,12 @@
 package com.adjt.agendamento.data.entity;
 
+import com.adjt.agendamento.core.enums.StatusPagamentoEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -38,6 +40,13 @@ public class ConsultaEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "especialidade_id", nullable = false)
     private EspecialidadeEntity especialidade;
+
+    @Column(name = "valor")
+    private BigDecimal valor;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 25)
+    private StatusPagamentoEnum status = StatusPagamentoEnum.PENDENTE_PAGAMENTO;
 
     @PrePersist
     protected void onCreate() {

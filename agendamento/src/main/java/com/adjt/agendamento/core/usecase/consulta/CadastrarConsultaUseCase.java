@@ -71,6 +71,7 @@ public class CadastrarConsultaUseCase {
                 .medico(medico)
                 .enfermeiro(enfermeiro)
                 .especialidade(especialidade)
+                .valor(consulta.getValor())
                 .build();
 
         LocalDateTime inicioDia = novaConsulta.getDataHora().toLocalDate().atStartOfDay();

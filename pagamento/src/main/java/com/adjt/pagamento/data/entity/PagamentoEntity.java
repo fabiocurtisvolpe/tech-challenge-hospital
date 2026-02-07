@@ -1,5 +1,6 @@
 package com.adjt.pagamento.data.entity;
 
+import com.adjt.pagamento.core.enums.StatusPagamentoEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,4 +39,8 @@ public class PagamentoEntity implements Serializable {
 
     @Column(name = "response_code")
     private Integer responseCode;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 25)
+    private StatusPagamentoEnum status = StatusPagamentoEnum.PENDENTE_PAGAMENTO;
 }

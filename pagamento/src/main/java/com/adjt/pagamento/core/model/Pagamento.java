@@ -1,5 +1,6 @@
 package com.adjt.pagamento.core.model;
 
+import com.adjt.pagamento.core.enums.StatusPagamentoEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -20,4 +21,5 @@ public class Pagamento implements Serializable {
     private Integer idPaciente;
     private BigDecimal valor;
     private Integer responseCode;
+    private StatusPagamentoEnum status;
 }

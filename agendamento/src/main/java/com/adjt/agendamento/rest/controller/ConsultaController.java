@@ -3,11 +3,13 @@ package com.adjt.agendamento.rest.controller;
 import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
 import com.adjt.agendamento.core.model.Consulta;
 import com.adjt.agendamento.core.usecase.consulta.*;
+import com.adjt.agendamento.rest.dto.event.ConsultaCriadaEvent;
 import com.adjt.agendamento.rest.dto.request.ConsultaRequest;
 import com.adjt.agendamento.rest.dto.request.PaginacaoRequest;
 import com.adjt.agendamento.rest.dto.response.ConsultaResponse;
 import com.adjt.agendamento.rest.mapper.ConsultaRestMapper;
 import com.adjt.agendamento.rest.security.util.UsuarioLogadoUtil;
+import com.adjt.agendamento.rest.service.AgendamentoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,18 +25,22 @@ public class ConsultaController {
     private final ObterPorIdConsultaUseCase obterPorIdConsultaUseCase;
     private final PaginadoConsultaUseCase<Consulta> paginadoConsultaUseCase;
 
+    private final AgendamentoService agendamentoService;
+
     public ConsultaController(ConsultaRestMapper consultaRestMapper,
                               AtualizarConsultaUseCase atualizarConsultaUseCase,
                               CadastrarConsultaUseCase cadastrarConsultaUseCase,
                               ExcluirConsultaUseCase excluirConsultaUseCase,
                               ObterPorIdConsultaUseCase obterPorIdConsultaUseCase,
-                              PaginadoConsultaUseCase<Consulta> paginadoConsultaUseCase) {
+                              PaginadoConsultaUseCase<Consulta> paginadoConsultaUseCase,
+                              AgendamentoService agendamentoService) {
         this.consultaRestMapper = consultaRestMapper;
         this.atualizarConsultaUseCase = atualizarConsultaUseCase;
         this.cadastrarConsultaUseCase = cadastrarConsultaUseCase;
         this.excluirConsultaUseCase = excluirConsultaUseCase;
         this.obterPorIdConsultaUseCase = obterPorIdConsultaUseCase;
         this.paginadoConsultaUseCase = paginadoConsultaUseCase;
+        this.agendamentoService = agendamentoService;
     }
 
     @PostMapping

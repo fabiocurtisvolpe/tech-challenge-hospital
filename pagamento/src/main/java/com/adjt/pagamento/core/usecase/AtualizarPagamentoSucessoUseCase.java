@@ -1,5 +1,6 @@
 package com.adjt.pagamento.core.usecase;
 
+import com.adjt.pagamento.core.enums.StatusPagamentoEnum;
 import com.adjt.pagamento.core.exception.NotificacaoException;
 import com.adjt.pagamento.core.model.Pagamento;
 import com.adjt.pagamento.core.port.PagamentoPort;
@@ -36,6 +37,7 @@ public class AtualizarPagamentoSucessoUseCase {
                 .idPaciente(pgto.getIdPaciente())
                 .responseCode(200)
                 .valor(pgto.getValor())
+                .status(StatusPagamentoEnum.APROVADO_PAGAMENTO)
                 .build();
 
         PagamentoValidator.cadastarAtualizar(atualizarPgto);

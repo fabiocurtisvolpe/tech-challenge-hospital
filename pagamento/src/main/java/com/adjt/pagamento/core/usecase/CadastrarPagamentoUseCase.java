@@ -1,5 +1,6 @@
 package com.adjt.pagamento.core.usecase;
 
+import com.adjt.pagamento.core.enums.StatusPagamentoEnum;
 import com.adjt.pagamento.core.model.Pagamento;
 import com.adjt.pagamento.core.port.PagamentoPort;
 import com.adjt.pagamento.core.validator.PagamentoValidator;
@@ -25,6 +26,7 @@ public class CadastrarPagamentoUseCase {
                 .idConsulta(model.getIdConsulta())
                 .idPaciente(model.getIdPaciente())
                 .valor(model.getValor())
+                .status(StatusPagamentoEnum.PENDENTE_PAGAMENTO)
                 .build();
 
         PagamentoValidator.cadastarAtualizar(novoPagamento);
