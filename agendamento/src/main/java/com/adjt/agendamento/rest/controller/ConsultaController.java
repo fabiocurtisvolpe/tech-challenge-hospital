@@ -1,6 +1,7 @@
 package com.adjt.agendamento.rest.controller;
 
 import com.adjt.agendamento.core.dto.ResultadoPaginacaoDTO;
+import com.adjt.agendamento.core.enums.StatusPagamentoEnum;
 import com.adjt.agendamento.core.model.Consulta;
 import com.adjt.agendamento.core.usecase.consulta.*;
 import com.adjt.agendamento.rest.dto.request.ConsultaRequest;
@@ -73,6 +74,10 @@ public class ConsultaController {
         Consulta resp = this.atualizarConsultaUseCase.run(consulta,
                 pacienteId, medicadoId, enfermeiroId, especialidadeId,
                 UsuarioLogadoUtil.getUsuarioLogado());
+
+        if (resp.getStatus() != StatusPagamentoEnum.APROVADO_PAGAMENTO) {
+            this.agendamentoService.pagamento(resp.getId(), resp.getPaciente().getId(), resp.getValor());
+        }
 
         return consultaRestMapper.toResponse(resp);
     }

@@ -43,4 +43,11 @@ public class PagamentoEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 25)
     private StatusPagamentoEnum status = StatusPagamentoEnum.PENDENTE_PAGAMENTO;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.getDataCriacao() == null) {
+            this.setDataCriacao(LocalDateTime.now());
+        }
+    }
 }

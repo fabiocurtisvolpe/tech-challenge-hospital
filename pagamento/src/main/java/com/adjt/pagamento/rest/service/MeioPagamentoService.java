@@ -40,7 +40,7 @@ public class MeioPagamentoService {
     public void enviarRequisicaoPagamento(ConsultaCriadaEvent event) {
         System.out.println("Tentando enviar pagamento ID: " + event.consultaId());
 
-        PagamentoRequest pagamentoRequest = new PagamentoRequest(event.valor(),
+        PagamentoRequest pagamentoRequest = new PagamentoRequest(event.valor().intValue(),
                 String.valueOf(event.consultaId()),
                 String.valueOf(event.pacienteId()));
 

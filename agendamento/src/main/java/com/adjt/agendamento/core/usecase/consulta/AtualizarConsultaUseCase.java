@@ -46,6 +46,8 @@ public class AtualizarConsultaUseCase {
         Usuario medico = this.usuarioPort.obterPorId(medicadoId);
         Especialidade especialidade = this.especialidadePort.obterPorId(especialidadeId);
 
+        Consulta consultaExistente = this.consultaPort.obterPorId(consulta.getId());
+
         if (enfermeiroId != null) {
             try {
                 enfermeiro = this.usuarioPort.obterPorId(enfermeiroId);
@@ -69,7 +71,7 @@ public class AtualizarConsultaUseCase {
                 .enfermeiro(enfermeiro)
                 .especialidade(especialidade)
                 .valor(consulta.getValor())
-                .status(consulta.getStatus())
+                .status(consultaExistente.getStatus())
                 .build();
 
         ConsultaValidator.validarPermissao(usrLogado);

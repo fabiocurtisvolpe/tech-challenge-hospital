@@ -85,6 +85,19 @@ services:
       postgres_pagamento:
         condition: service_healthy
 
+  # --- Rabbitmq ---
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: my_rabbitmq
+    ports:
+      - "5672:5672"   # Porta de comunicação (Java)
+      - "15672:15672" # Porta do Painel de Controle (Browser)
+    networks:
+      - fase3net
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
 # --- Definição de Volumes Persistentes ---
 volumes:
   agendamento_pg_data:

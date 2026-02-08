@@ -19,7 +19,7 @@ public class CadastrarPagamentoUseCase {
         return new CadastrarPagamentoUseCase(pagamentoPort);
     }
 
-    public Pagamento run(Pagamento model) {
+    public void run(Pagamento model) {
 
         Pagamento novoPagamento = Pagamento.builder()
                 .dataHora(LocalDateTime.now())
@@ -30,6 +30,6 @@ public class CadastrarPagamentoUseCase {
                 .build();
 
         PagamentoValidator.cadastarAtualizar(novoPagamento);
-        return this.pagamentoPort.criar(novoPagamento);
+        this.pagamentoPort.criar(novoPagamento);
     }
 }
