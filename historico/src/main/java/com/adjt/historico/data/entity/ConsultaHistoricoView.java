@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.Immutable;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -35,4 +36,10 @@ public class ConsultaHistoricoView {
 
     @Column(name = "especialidade_nome")
     private String especialidadeNome;
+
+    @Column(name = "valor")
+    private BigDecimal valor;
+
+    @Column(name = "status")
+    private String status;
 }

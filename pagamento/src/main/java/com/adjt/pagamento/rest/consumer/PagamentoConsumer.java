@@ -3,6 +3,7 @@ package com.adjt.pagamento.rest.consumer;
 import com.adjt.pagamento.core.enums.StatusPagamentoEnum;
 import com.adjt.pagamento.core.model.Pagamento;
 import com.adjt.pagamento.core.usecase.CadastrarPagamentoUseCase;
+import com.adjt.pagamento.rest.config.RabbitConfig;
 import com.adjt.pagamento.rest.dto.event.ConsultaCriadaEvent;
 import com.adjt.pagamento.rest.dto.event.PagamentoFinalizadoEvent;
 import com.adjt.pagamento.rest.service.MeioPagamentoService;
@@ -27,7 +28,7 @@ public class PagamentoConsumer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @RabbitListener(queues = "queue.pagamento.processar")
+    @RabbitListener(queues = RabbitConfig.QUEUE_PAGAMENTO_PROCESSAR)
     public void receberConsultaParaPagar(ConsultaCriadaEvent event) {
         try {
 
@@ -49,6 +50,6 @@ public class PagamentoConsumer {
 
     private void notificarAgendamento(Integer id, StatusPagamentoEnum status) {
         var resultado = new PagamentoFinalizadoEvent(id, status);
-        rabbitTemplate.convertAndSend("exchange.pagamento", "routing.pagamento.resultado", resultado);
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_PAGAMENTO, RabbitConfig.ROUTING_KEY_RESULTADO, resultado);
     }
 }

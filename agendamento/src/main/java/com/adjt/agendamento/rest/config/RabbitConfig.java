@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    public static final String QUEUE_ATUALIZAR = "queue.agendamento.atualizar";
+    public static final String QUEUE_AGENDAMENTO_ATUALIZAR = "queue.agendamento.atualizar";
     public static final String EXCHANGE_PAGAMENTO = "exchange.pagamento";
     public static final String ROUTING_KEY_RESULTADO = "routing.pagamento.resultado";
 
@@ -23,7 +23,7 @@ public class RabbitConfig {
     @Bean
     public Queue queueAtualizar() {
         // durable: true (a fila sobrevive se o RabbitMQ reiniciar)
-        return new Queue(QUEUE_ATUALIZAR, true);
+        return new Queue(QUEUE_AGENDAMENTO_ATUALIZAR, true);
     }
 
     @Bean

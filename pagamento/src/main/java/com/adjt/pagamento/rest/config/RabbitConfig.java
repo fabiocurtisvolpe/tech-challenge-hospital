@@ -11,9 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    public static final String QUEUE_PAGAMENTO = "queue.pagamento.processar";
+    public static final String QUEUE_PAGAMENTO_PROCESSAR = "queue.pagamento.processar";
     public static final String EXCHANGE_CONSULTA = "exchange.consulta";
     public static final String ROUTING_KEY_CRIADA = "routing.consulta.criada";
+
+    public static final String EXCHANGE_PAGAMENTO = "exchange.pagamento";
+    public static final String ROUTING_KEY_RESULTADO = "routing.pagamento.resultado";
 
     @Bean
     public Jackson2JsonMessageConverter messageConverter() {
@@ -22,7 +25,7 @@ public class RabbitConfig {
 
     @Bean
     public Queue queuePagamento() {
-        return new Queue(QUEUE_PAGAMENTO, true);
+        return new Queue(QUEUE_PAGAMENTO_PROCESSAR, true);
     }
 
     @Bean
