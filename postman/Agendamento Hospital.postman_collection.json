@@ -1,0 +1,874 @@
+{
+  "info": {
+    "_postman_id": "8847964e-d1e3-45fb-89fb-696bbd84f6f4",
+    "name": "Agendamento Hospital",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22368349",
+    "_collection_link": "https://go.postman.co/collection/22368349-8847964e-d1e3-45fb-89fb-696bbd84f6f4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "usuario",
+      "item": [
+        {
+          "name": "Cadastrar Médico",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": null,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Médico",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 5,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1],\r\n    \"telefone\": \"(19) 98103-0024\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Excluir",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 5,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1],\r\n    \"telefone\": \"(19) 98103-0024\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario/1",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obter",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 5,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1],\r\n    \"telefone\": \"(19) 98103-0024\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario/2",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cadastrar Enfermeiro",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": null,\r\n    \"nome\": \"Enfermeiro 01\",\r\n    \"email\": \"enfermeiro1@hospital.com\",\r\n    \"senha\": \"enfermeiro123\",\r\n    \"perfisIds\": [2]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Enfermeiro",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": null,\r\n    \"nome\": \"Enfermeiro 01\",\r\n    \"email\": \"enfermeiro1@hospital.com\",\r\n    \"senha\": \"enfermeiro123\",\r\n    \"perfisIds\": [2],\r\n    \"telefone\": \"(19) 3351-0025\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cadastrar Paciente",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": null,\r\n    \"nome\": \"Paciente 01\",\r\n    \"email\": \"paciente1@gmail.com\",\r\n    \"senha\": \"paciente123\",\r\n    \"perfisIds\": [3]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "paginado Copy",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pagina\": \"0\",\r\n    \"qtdPagina\": \"5\" ,\r\n    \"filtros\": [\r\n        {\r\n            \"campo\": \"nome\",\r\n            \"valor\": \"Fabio Curtis Volpe Teste\",\r\n            \"operador\": \"EQUALS\"\r\n        }\r\n    ],\r\n    \"ordenacao\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario/paginado",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario",
+                "paginado"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Paciente",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": null,\r\n    \"nome\": \"Paciente 01\",\r\n    \"email\": \"paciente1@gmail.com\",\r\n    \"senha\": \"paciente123\",\r\n    \"perfisIds\": [3],\r\n    \"telefone\": \"(19) 98103-0020\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "info",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/usuario/info",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "usuario",
+                "info"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "item": [
+        {
+          "name": "Login_admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a requisição teve sucesso (Status 200)",
+                  "if (pm.response.code === 200) {",
+                  "    // O token vem diretamente no body como string (não é JSON)",
+                  "    var token = pm.response.text();",
+                  "    ",
+                  "    // Salva o token na variável de ambiente",
+                  "    pm.environment.set(\"meu_jwt\", token);",
+                  "    ",
+                  "    console.log(\"Token capturado e salvo em 'meu_jwt'!\");",
+                  "    console.log(\"Token: \" + token);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@hospital.com\",\r\n    \"senha\": \"admin123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/login",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login_medico",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a requisição teve sucesso (Status 200)",
+                  "if (pm.response.code === 200) {",
+                  "    // O token vem diretamente no body como string (não é JSON)",
+                  "    var token = pm.response.text();",
+                  "    ",
+                  "    // Salva o token na variável de ambiente",
+                  "    pm.environment.set(\"meu_jwt\", token);",
+                  "    ",
+                  "    console.log(\"Token capturado e salvo em 'meu_jwt'!\");",
+                  "    console.log(\"Token: \" + token);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"medico@hospital.com\",\r\n    \"senha\": \"medico123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/login",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login_enfermeiro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a requisição teve sucesso (Status 200)",
+                  "if (pm.response.code === 200) {",
+                  "    // O token vem diretamente no body como string (não é JSON)",
+                  "    var token = pm.response.text();",
+                  "    ",
+                  "    // Salva o token na variável de ambiente",
+                  "    pm.environment.set(\"meu_jwt\", token);",
+                  "    ",
+                  "    console.log(\"Token capturado e salvo em 'meu_jwt'!\");",
+                  "    console.log(\"Token: \" + token);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"enfermeiro@hospital.com\",\r\n    \"senha\": \"enfermeiro123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/login",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login_paciente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a requisição teve sucesso (Status 200)",
+                  "if (pm.response.code === 200) {",
+                  "    // O token vem diretamente no body como string (não é JSON)",
+                  "    var token = pm.response.text();",
+                  "    ",
+                  "    // Salva o token na variável de ambiente",
+                  "    pm.environment.set(\"meu_jwt\", token);",
+                  "    ",
+                  "    console.log(\"Token capturado e salvo em 'meu_jwt'!\");",
+                  "    console.log(\"Token: \" + token);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"paciente@gmail.com\",\r\n    \"senha\": \"paciente123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/login",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "consulta",
+      "item": [
+        {
+          "name": "Cadastrar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": null,\r\n    \"dataHora\": \"2026-01-26T15:00:00\",\r\n    \"diagnostico\": null,\r\n    \"prescricao\": null,\r\n    \"pacienteId\": 4,\r\n    \"medicadoId\": 2,\r\n    \"enfermeiroId\": null,\r\n    \"especialidadeId\": 2,\r\n    \"valor\": 20\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/consulta",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "consulta"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 2,\r\n    \"dataHora\": \"2026-01-26T14:30:00\",\r\n    \"diagnostico\": null,\r\n    \"prescricao\": null,\r\n    \"pacienteId\": 4,\r\n    \"medicadoId\": 2,\r\n    \"enfermeiroId\": null,\r\n    \"especialidadeId\": 2,\r\n    \"valor\": 20\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/consulta",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "consulta"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Excluir",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 5,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1],\r\n    \"telefone\": \"(19) 98103-0024\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/consulta/1",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "consulta",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obter",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 5,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1],\r\n    \"telefone\": \"(19) 98103-0024\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/consulta/2",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "consulta",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "paginado",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{meu_jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pagina\": \"0\",\r\n    \"qtdPagina\": \"5\" ,\r\n    \"filtros\": [\r\n        {\r\n            \"campo\": \"paciente.nome\",\r\n            \"valor\": \"Paciente\",\r\n            \"operador\": \"LIKE\"\r\n        }\r\n    ],\r\n    \"ordenacao\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_AGENDAMENTO}}/consulta/paginado",
+              "host": [
+                "{{URL_API_AGENDAMENTO}}"
+              ],
+              "path": [
+                "consulta",
+                "paginado"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "procpag",
+      "item": [
+        {
+          "name": "requisicao",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"valor\": 40,\r\n  \"pagamento_id\": \"1\",\r\n  \"cliente_id\": \"2\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8089/requisicao",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8089",
+              "path": [
+                "requisicao"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "requisicao",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8089/requisicao/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8089",
+              "path": [
+                "requisicao",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "historico",
+      "item": [
+        {
+          "name": "historico",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query ListarComFiltro($meuFiltro: ConsultaFilter) {\r\n  historicoConsulta(filter: $meuFiltro) {\r\n    id\r\n    rev\r\n    status\r\n    pacienteNome\r\n  }\r\n}",
+                "variables": "{\r\n  \"meuFiltro\": {\r\n    \"status\": \"APROVADO_PAGAMENTO\"\r\n  }\r\n}"
+              }
+            },
+            "url": {
+              "raw": "{{URL_API_HISTORICO}}",
+              "host": [
+                "{{URL_API_HISTORICO}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Public",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL_API_AGENDAMENTO}}/public",
+          "host": [
+            "{{URL_API_AGENDAMENTO}}"
+          ],
+          "path": [
+            "public"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
