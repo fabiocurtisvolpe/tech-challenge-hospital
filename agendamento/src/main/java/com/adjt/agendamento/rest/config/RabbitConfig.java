@@ -15,6 +15,9 @@ public class RabbitConfig {
     public static final String EXCHANGE_PAGAMENTO = "exchange.pagamento";
     public static final String ROUTING_KEY_RESULTADO = "routing.pagamento.resultado";
 
+    public static final String EXCHANGE_CONSULTA = "exchange.consulta";
+    public static final String ROUTING_KEY_CONSULTA_CRIADA = "routing.consulta.criada";
+
     @Bean
     public Jackson2JsonMessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();

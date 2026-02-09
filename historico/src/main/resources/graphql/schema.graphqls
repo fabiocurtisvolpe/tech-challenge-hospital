@@ -1,16 +1,30 @@
+
+
+input ConsultaFilter {
+    id: ID
+    status: String
+    pacienteNome: String
+    medicoNome: String
+    dataInicio: String
+    dataFim: String
+}
+
 type Query {
-    historicoConsulta(id: ID): [ConsultaAud]
+    historicoConsulta(filter: ConsultaFilter): [ConsultaAud]
 }
 
 type ConsultaAud {
     id: ID
     rev: Int
     revtype: Int
+    dataHora: String
     diagnostico: String
     prescricao: String
-    paciente: Usuario
-    medico: Usuario
-    especialidade: Especialidade
+    pacienteNome: String
+    medicoNome: String
+    especialidadeNome: String
+    status: String
+    valor: Float
 }
 
 type Usuario {
