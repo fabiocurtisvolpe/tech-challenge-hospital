@@ -50,6 +50,6 @@ public class PagamentoConsumer {
 
     private void notificarAgendamento(Integer id, StatusPagamentoEnum status) {
         var resultado = new PagamentoFinalizadoEvent(id, status);
-        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_PAGAMENTO, RabbitConfig.ROUTING_KEY_RESULTADO, resultado);
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_AGENDAMENTO, RabbitConfig.ROUTING_KEY_RESULTADO, resultado);
     }
 }
