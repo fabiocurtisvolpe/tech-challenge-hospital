@@ -1,11 +1,12 @@
 package com.adjt.agendamento.rest.consumer;
 
-import com.adjt.agendamento.core.usecase.consulta.AtualizarStatusPagamentoConsultaUseCase;
 import com.adjt.agendamento.rest.config.RabbitConfig;
-import com.adjt.agendamento.rest.dto.event.PagamentoFinalizadoEvent;
+import com.adjt.agendamento.rest.dto.event.NotificacaoResultadoEvent;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class ResultadoNotificacaoConsumer {
 
@@ -13,7 +14,9 @@ public class ResultadoNotificacaoConsumer {
     }
 
     @RabbitListener(queues = RabbitConfig.QUEUE_NOTIFICACAO_ATUALIZAR)
-    public void atualizarStatusConsulta(PagamentoFinalizadoEvent event) {
-
+    public void notificacaoStatusConsulta(NotificacaoResultadoEvent event) {
+        if (event.resultado()) {
+            log.info("Notificação da consulta enviada com sucesso!");
+        }
     }
 }

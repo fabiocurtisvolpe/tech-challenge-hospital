@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
 @Service
-public class AgendamentoService {
+public class PagamentoService {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public AgendamentoService(RabbitTemplate rabbitTemplate) {
+    public PagamentoService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
     public void pagamento(Integer idConsulta, Integer idPaciente, BigDecimal valor) {
 
         ConsultaCriadaEvent event = new ConsultaCriadaEvent(idConsulta, idPaciente, valor);
-        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_CONSULTA, RabbitConfig.ROUTING_KEY_CONSULTA_CRIADA, event);
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_PAGAMENTO, RabbitConfig.ROUTING_KEY_CONSULTA_CRIADA, event);
     }
 }

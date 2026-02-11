@@ -29,4 +29,8 @@ public class ObterPorIdConsultaUseCase {
         ConsultaValidator.validarPermissao(usrLogado);
         return consultaPort.obterPorId(id);
     }
+
+    public Consulta runNotificacao(Integer id) {
+        return consultaPort.obterPorId(id);
+    }
 }

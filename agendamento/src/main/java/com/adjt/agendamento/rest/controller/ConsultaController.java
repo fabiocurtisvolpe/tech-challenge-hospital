@@ -9,7 +9,8 @@ import com.adjt.agendamento.rest.dto.request.PaginacaoRequest;
 import com.adjt.agendamento.rest.dto.response.ConsultaResponse;
 import com.adjt.agendamento.rest.mapper.ConsultaRestMapper;
 import com.adjt.agendamento.rest.security.util.UsuarioLogadoUtil;
-import com.adjt.agendamento.rest.service.AgendamentoService;
+import com.adjt.agendamento.rest.service.PagamentoService;
+import com.adjt.agendamento.rest.service.NotificacaoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,8 @@ public class ConsultaController {
     private final ObterPorIdConsultaUseCase obterPorIdConsultaUseCase;
     private final PaginadoConsultaUseCase<Consulta> paginadoConsultaUseCase;
 
-    private final AgendamentoService agendamentoService;
+    private final PagamentoService pagamentoService;
+    private final NotificacaoService notificacaoService;
 
     public ConsultaController(ConsultaRestMapper consultaRestMapper,
                               AtualizarConsultaUseCase atualizarConsultaUseCase,
@@ -33,14 +35,17 @@ public class ConsultaController {
                               ExcluirConsultaUseCase excluirConsultaUseCase,
                               ObterPorIdConsultaUseCase obterPorIdConsultaUseCase,
                               PaginadoConsultaUseCase<Consulta> paginadoConsultaUseCase,
-                              AgendamentoService agendamentoService) {
+                              PagamentoService pagamentoService,
+                              NotificacaoService notificacaoService) {
+
         this.consultaRestMapper = consultaRestMapper;
         this.atualizarConsultaUseCase = atualizarConsultaUseCase;
         this.cadastrarConsultaUseCase = cadastrarConsultaUseCase;
         this.excluirConsultaUseCase = excluirConsultaUseCase;
         this.obterPorIdConsultaUseCase = obterPorIdConsultaUseCase;
         this.paginadoConsultaUseCase = paginadoConsultaUseCase;
-        this.agendamentoService = agendamentoService;
+        this.pagamentoService = pagamentoService;
+        this.notificacaoService = notificacaoService;
     }
 
     @PostMapping
@@ -57,7 +62,8 @@ public class ConsultaController {
                 pacienteId, medicadoId, enfermeiroId, especialidadeId,
                 UsuarioLogadoUtil.getUsuarioLogado());
 
-        this.agendamentoService.pagamento(resp.getId(), resp.getPaciente().getId(), resp.getValor());
+        this.pagamentoService.pagamento(resp.getId(), resp.getPaciente().getId(), resp.getValor());
+        this.notificacaoService.enviarNotificacao(resp.getId());
         return consultaRestMapper.toResponse(resp);
     }
 
@@ -76,8 +82,9 @@ public class ConsultaController {
                 UsuarioLogadoUtil.getUsuarioLogado());
 
         if (resp.getStatus() != StatusPagamentoEnum.APROVADO_PAGAMENTO) {
-            this.agendamentoService.pagamento(resp.getId(), resp.getPaciente().getId(), resp.getValor());
+            this.pagamentoService.pagamento(resp.getId(), resp.getPaciente().getId(), resp.getValor());
         }
+        this.notificacaoService.enviarNotificacao(resp.getId());
 
         return consultaRestMapper.toResponse(resp);
     }
