@@ -11,11 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    public static final String QUEUE_NOTIFICACAO_PROCESSAR = "queue.notificacao.processar";
-    public static final String EXCHANGE_NOTIFICACAO = "notificacao.events.ex";
-    public static final String ROUTING_KEY_ENVIAR = "routing.notificacao.enviar";
-
     public static final String EXCHANGE_AGENDAMENTO = "agendamento.events.ex";
+    public static final String EXCHANGE_NOTIFICACAO = "notificacao.events.ex";
+
+    public static final String QUEUE_NOTIFICACAO_PROCESSAR = "queue.notificacao.processar";
+
+    public static final String ROUTING_KEY_ENVIAR = "routing.notificacao.enviar";
     public static final String ROUTING_KEY_RESULTADO = "routing.notificacao.resultado";
 
     @Bean

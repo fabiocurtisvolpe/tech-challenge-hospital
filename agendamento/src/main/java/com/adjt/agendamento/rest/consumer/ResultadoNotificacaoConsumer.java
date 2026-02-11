@@ -15,8 +15,6 @@ public class ResultadoNotificacaoConsumer {
 
     @RabbitListener(queues = RabbitConfig.QUEUE_NOTIFICACAO_ATUALIZAR)
     public void notificacaoStatusConsulta(NotificacaoResultadoEvent event) {
-        if (event.resultado()) {
-            log.info("Notificação da consulta enviada com sucesso!");
-        }
+        log.info("notificacaoStatusConsulta: {}", event);
     }
 }

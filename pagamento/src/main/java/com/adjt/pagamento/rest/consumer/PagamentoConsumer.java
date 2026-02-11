@@ -7,10 +7,12 @@ import com.adjt.pagamento.rest.config.RabbitConfig;
 import com.adjt.pagamento.rest.dto.event.ConsultaCriadaEvent;
 import com.adjt.pagamento.rest.dto.event.PagamentoFinalizadoEvent;
 import com.adjt.pagamento.rest.service.MeioPagamentoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class PagamentoConsumer {
 
@@ -40,6 +42,8 @@ public class PagamentoConsumer {
 
             this.cadastrarPagamentoUseCase.run(pagamento);
 
+            log.info("receberConsultaParaPagar: {}", event);
+
             meioPagamentoService.enviarRequisicaoPagamento(event);
             notificarAgendamento(event.consultaId(), StatusPagamentoEnum.APROVADO_PAGAMENTO);
 
@@ -50,6 +54,8 @@ public class PagamentoConsumer {
 
     private void notificarAgendamento(Integer id, StatusPagamentoEnum status) {
         var resultado = new PagamentoFinalizadoEvent(id, status);
+        log.info("notificarAgendamento: {}", resultado);
+
         rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_AGENDAMENTO, RabbitConfig.ROUTING_KEY_RESULTADO, resultado);
     }
 }
