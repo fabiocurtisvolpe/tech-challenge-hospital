@@ -15,7 +15,7 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("API de Histórico de Consultas")
                         .version("1.0")
-                        .description("Serviço de Histórico via GraphQL. Para testar as queries, utilize o [GraphiQL](/graphiql)\""));
+                        .description("Serviço de Histórico via GraphQL. Para testar as queries, utilize o [GraphiQL](/api/historico)\""));
     }
 
     @Bean
