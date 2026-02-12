@@ -603,7 +603,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"id\": null,\r\n    \"dataHora\": \"2026-01-26T15:00:00\",\r\n    \"diagnostico\": null,\r\n    \"prescricao\": null,\r\n    \"pacienteId\": 4,\r\n    \"medicadoId\": 2,\r\n    \"enfermeiroId\": null,\r\n    \"especialidadeId\": 2,\r\n    \"valor\": 20\r\n}",
+              "raw": "{\r\n    \"id\": null,\r\n    \"dataHora\": \"2026-02-26T15:00:00\",\r\n    \"diagnostico\": null,\r\n    \"prescricao\": null,\r\n    \"pacienteId\": 4,\r\n    \"medicadoId\": 2,\r\n    \"enfermeiroId\": null,\r\n    \"especialidadeId\": 2,\r\n    \"valor\": 20\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -639,7 +639,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"id\": 2,\r\n    \"dataHora\": \"2026-01-26T14:30:00\",\r\n    \"diagnostico\": null,\r\n    \"prescricao\": null,\r\n    \"pacienteId\": 4,\r\n    \"medicadoId\": 2,\r\n    \"enfermeiroId\": null,\r\n    \"especialidadeId\": 2,\r\n    \"valor\": 20\r\n}",
+              "raw": "{\r\n    \"id\": 2,\r\n    \"dataHora\": \"2026-02-26T14:30:00\",\r\n    \"diagnostico\": null,\r\n    \"prescricao\": null,\r\n    \"pacienteId\": 4,\r\n    \"medicadoId\": 2,\r\n    \"enfermeiroId\": null,\r\n    \"especialidadeId\": 2,\r\n    \"valor\": 20\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -653,43 +653,6 @@
               ],
               "path": [
                 "consulta"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Excluir",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{meu_jwt}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "DELETE",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"id\": 5,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1],\r\n    \"telefone\": \"(19) 98103-0024\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{URL_API_AGENDAMENTO}}/consulta/1",
-              "host": [
-                "{{URL_API_AGENDAMENTO}}"
-              ],
-              "path": [
-                "consulta",
-                "1"
               ]
             }
           },
@@ -843,15 +806,55 @@
               }
             },
             "url": {
-              "raw": "{{URL_API_HISTORICO}}",
+              "raw": "{{URL_API_HISTORICO}}/historico-data",
               "host": [
                 "{{URL_API_HISTORICO}}"
+              ],
+              "path": [
+                "historico-data"
               ]
             }
           },
           "response": []
         }
       ]
+    },
+    {
+      "name": "Excluir",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{meu_jwt}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 5,\r\n    \"nome\": \"Medico 01\",\r\n    \"email\": \"medico01@hospital.com\",\r\n    \"senha\": \"medico123\",\r\n    \"perfisIds\": [1],\r\n    \"telefone\": \"(19) 98103-0024\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL_API_AGENDAMENTO}}/consulta/1",
+          "host": [
+            "{{URL_API_AGENDAMENTO}}"
+          ],
+          "path": [
+            "consulta",
+            "1"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "Public",
