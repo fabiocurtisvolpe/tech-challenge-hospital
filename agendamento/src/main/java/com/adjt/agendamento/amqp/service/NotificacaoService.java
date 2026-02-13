@@ -1,9 +1,9 @@
-package com.adjt.agendamento.rest.service;
+package com.adjt.agendamento.amqp.service;
 
 import com.adjt.agendamento.core.model.Consulta;
 import com.adjt.agendamento.core.usecase.consulta.ObterPorIdConsultaUseCase;
-import com.adjt.agendamento.rest.config.RabbitConfig;
-import com.adjt.agendamento.rest.dto.event.ConsultaNotificacaoEvent;
+import com.adjt.agendamento.amqp.config.RabbitConfig;
+import com.adjt.agendamento.amqp.event.ConsultaNotificacaoEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;

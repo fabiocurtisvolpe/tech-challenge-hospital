@@ -1,7 +1,7 @@
-package com.adjt.agendamento.rest.consumer;
+package com.adjt.agendamento.amqp.consumer;
 
-import com.adjt.agendamento.rest.config.RabbitConfig;
-import com.adjt.agendamento.rest.dto.event.NotificacaoResultadoEvent;
+import com.adjt.agendamento.amqp.config.RabbitConfig;
+import com.adjt.agendamento.amqp.event.NotificacaoResultadoEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;

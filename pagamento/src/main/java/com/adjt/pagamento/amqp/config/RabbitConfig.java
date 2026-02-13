@@ -1,4 +1,4 @@
-package com.adjt.pagamento.rest.config;
+package com.adjt.pagamento.amqp.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

@@ -1,7 +1,7 @@
-package com.adjt.agendamento.rest.service;
+package com.adjt.agendamento.amqp.service;
 
-import com.adjt.agendamento.rest.config.RabbitConfig;
-import com.adjt.agendamento.rest.dto.event.ConsultaCriadaEvent;
+import com.adjt.agendamento.amqp.config.RabbitConfig;
+import com.adjt.agendamento.amqp.event.ConsultaCriadaEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;

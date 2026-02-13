@@ -1,4 +1,4 @@
-package com.adjt.agendamento.rest.dto.event;
+package com.adjt.agendamento.amqp.event;
 
 import com.adjt.agendamento.core.enums.StatusPagamentoEnum;
 

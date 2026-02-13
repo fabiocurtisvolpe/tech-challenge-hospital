@@ -1,4 +1,4 @@
-package com.adjt.agendamento.rest.dto.event;
+package com.adjt.agendamento.amqp.event;
 
 public record NotificacaoResultadoEvent(Integer id, boolean resultado) {
 }

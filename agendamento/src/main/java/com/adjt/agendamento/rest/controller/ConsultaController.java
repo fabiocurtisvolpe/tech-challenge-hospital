@@ -9,8 +9,8 @@ import com.adjt.agendamento.rest.dto.request.PaginacaoRequest;
 import com.adjt.agendamento.rest.dto.response.ConsultaResponse;
 import com.adjt.agendamento.rest.mapper.ConsultaRestMapper;
 import com.adjt.agendamento.rest.security.util.UsuarioLogadoUtil;
-import com.adjt.agendamento.rest.service.PagamentoService;
-import com.adjt.agendamento.rest.service.NotificacaoService;
+import com.adjt.agendamento.amqp.service.PagamentoService;
+import com.adjt.agendamento.amqp.service.NotificacaoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

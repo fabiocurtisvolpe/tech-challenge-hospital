@@ -1,4 +1,4 @@
-package com.adjt.pagamento.rest.config;
+package com.adjt.pagamento.amqp.config;
 
 import com.adjt.pagamento.core.model.Pagamento;
 import com.adjt.pagamento.core.port.PagamentoPort;

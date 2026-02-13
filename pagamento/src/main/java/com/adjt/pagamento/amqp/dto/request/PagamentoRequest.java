@@ -1,4 +1,4 @@
-package com.adjt.pagamento.rest.dto.request;
+package com.adjt.pagamento.amqp.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

@@ -1,9 +1,9 @@
-package com.adjt.pagamento.rest.service;
+package com.adjt.pagamento.amqp.service;
 
 import com.adjt.pagamento.core.usecase.AtualizarPagamentoErroUseCase;
 import com.adjt.pagamento.core.usecase.AtualizarPagamentoSucessoUseCase;
-import com.adjt.pagamento.rest.dto.event.ConsultaCriadaEvent;
-import com.adjt.pagamento.rest.dto.request.PagamentoRequest;
+import com.adjt.pagamento.amqp.dto.event.ConsultaCriadaEvent;
+import com.adjt.pagamento.amqp.dto.request.PagamentoRequest;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;

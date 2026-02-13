@@ -1,12 +1,12 @@
-package com.adjt.pagamento.rest.consumer;
+package com.adjt.pagamento.amqp.consumer;
 
 import com.adjt.pagamento.core.enums.StatusPagamentoEnum;
 import com.adjt.pagamento.core.model.Pagamento;
 import com.adjt.pagamento.core.usecase.CadastrarPagamentoUseCase;
-import com.adjt.pagamento.rest.config.RabbitConfig;
-import com.adjt.pagamento.rest.dto.event.ConsultaCriadaEvent;
-import com.adjt.pagamento.rest.dto.event.PagamentoFinalizadoEvent;
-import com.adjt.pagamento.rest.service.MeioPagamentoService;
+import com.adjt.pagamento.amqp.config.RabbitConfig;
+import com.adjt.pagamento.amqp.dto.event.ConsultaCriadaEvent;
+import com.adjt.pagamento.amqp.dto.event.PagamentoFinalizadoEvent;
+import com.adjt.pagamento.amqp.service.MeioPagamentoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

@@ -1,4 +1,4 @@
-package com.adjt.pagamento.rest.dto.event;
+package com.adjt.pagamento.amqp.dto.event;
 
 import java.math.BigDecimal;
 

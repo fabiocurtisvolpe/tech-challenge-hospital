@@ -1,4 +1,4 @@
-package com.adjt.pagamento.rest.dto.event;
+package com.adjt.pagamento.amqp.dto.event;
 
 import com.adjt.pagamento.core.enums.StatusPagamentoEnum;
 
