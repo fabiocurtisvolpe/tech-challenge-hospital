@@ -45,6 +45,19 @@ services:
       retries: 5
       start_period: 15s
 
+  # --- Rabbitmq ---
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: my_rabbitmq
+    ports:
+      - "5672:5672"   # Porta de comunicação (Java)
+      - "15672:15672" # Porta do Painel de Controle (Browser)
+    networks:
+      - fase3net
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
   # --- Aplicação Procpag ---
   procpag:
     image: docker.io/erickemprobr/procpag:latest
@@ -60,18 +73,74 @@ services:
       postgres_pagamento:
         condition: service_healthy
 
-  # --- Rabbitmq ---
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: my_rabbitmq
+  # --- SERVIÇO: AGENDAMENTO ---
+  ms-agendamento:
+    build: ../agendamento
+    container_name: ms_agendamento
     ports:
-      - "5672:5672"   # Porta de comunicação (Java)
-      - "15672:15672" # Porta do Painel de Controle (Browser)
+      - "8081:8081"
     networks:
       - fase3net
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_agendamento:5432/agendamento?sslmode=disable
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: secret
+      SPRING_RABBITMQ_HOST: rabbitmq
+    depends_on:
+      postgres_agendamento:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+
+  # --- SERVIÇO: PAGAMENTO ---
+  ms-pagamento:
+    build: ../pagamento # Caminho para a pasta onde está o Dockerfile do pagamento
+    container_name: ms_pagamento
+    ports:
+      - "8084:8084"
+    networks:
+      - fase3net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_pagamento:5432/pagamento?sslmode=disable
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: secret
+      SPRING_RABBITMQ_HOST: rabbitmq
+      API_PAGAMENTO_URL: http://procpag:8089/requisicao
+    depends_on:
+      postgres_pagamento:
+        condition: service_healthy
+      procpag:
+        condition: service_started
+
+  # --- SERVIÇO: NOTIFICAÇÃO ---
+  ms-notificacao:
+    build: ../notificacao
+    container_name: ms_notificacao
+    ports:
+      - "8083:8083"
+    networks:
+      - fase3net
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_started
+
+  # --- SERVIÇO: HISTÓRICO ---
+  ms-historico:
+    build: ../historico
+    container_name: ms_historico
+    ports:
+      - "8082:8082"
+    networks:
+      - fase3net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_agendamento:5432/agendamento?sslmode=disable
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: secret
+    depends_on:
+      postgres_agendamento:
+        condition: service_healthy
 
 # --- Definição de Volumes Persistentes ---
 volumes:
