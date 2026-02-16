@@ -48,11 +48,11 @@ public class PagamentoConsumer {
             boolean isValida = MessageSecurityUtil.verify(jsonPayload, signature, this.publicKey);
 
             if (!isValida) {
-                System.err.println("ALERTA DE SEGURANÇA: Mensagem rejeitada! Assinatura inválida.");
+                log.error("ALERTA DE SEGURANÇA: Mensagem rejeitada! Assinatura inválida.");
                 return;
             }
 
-            System.out.println("Mensagem verificada com sucesso! Processando pagamento...");
+            log.info("Mensagem verificada com sucesso! Processando pagamento...");
 
             Pagamento pagamento = Pagamento.builder()
                     .idConsulta(event.consultaId())
@@ -68,7 +68,7 @@ public class PagamentoConsumer {
             notificarAgendamento(event.consultaId());
 
         } catch (Exception e) {
-            System.err.println("Erro técnico ao validar segurança da mensagem: " + e.getMessage());
+            log.error("Erro técnico ao validar segurança da mensagem: {}", e.getMessage());
         }
     }
 
