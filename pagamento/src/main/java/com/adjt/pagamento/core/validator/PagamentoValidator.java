@@ -5,12 +5,6 @@ import com.adjt.pagamento.core.util.MensagemUtil;
 
 public class PagamentoValidator {
 
-    public static void validarId(Pagamento pgto) {
-        if (pgto.getId() == null) {
-            throw new IllegalArgumentException(MensagemUtil.ID_VAZIO);
-        }
-    }
-
     public static void cadastarAtualizar(Pagamento pgto) {
 
         if (pgto.getIdConsulta() == null) {
